@@ -1,0 +1,246 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*************MIXINS*************/
+/*Example: @include border-radius(10px);*/
+/*Example: @include box-sizing(border-box);*/
+/*Example: @include placeholder {
+    style here
+}*/
+.button {
+  cursor: pointer; }
+
+.clear:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.isInvisible {
+  display: none !important; }
+
+.menu {
+  width: 100%;
+  height: 6em;
+  display: table;
+  position: fixed;
+  z-index: 3;
+  bottom: 0; }
+
+.mouse-cursor {
+  position: absolute;
+  display: block;
+  z-index: 5;
+  pointer-events: none; }
+
+.mouse-cursor div {
+  display: none;
+  font-size: 2em;
+  padding: 0.3em 0 0 0.3em;
+  opacity: 0.5; }
+
+.mouse-cursor div.active {
+  display: block; }
+
+.current-tool div {
+  display: none; }
+
+.current-tool div.active {
+  display: table;
+  width: 5em;
+  height: 5em;
+  margin-left: 7em;
+  margin-top: 1.5em;
+  text-align: center; }
+
+.current-tool div.active i {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 3em; }
+
+.menu.trees,
+.menu.terrain,
+.menu.all {
+  width: 100%;
+  position: fixed;
+  z-index: 3;
+  bottom: 0;
+  background-color: #4a7893;
+  display: none;
+  transform: translate(0, 100%);
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  transition: all .3s ease; }
+
+.menu.all.active {
+  display: table;
+  transform: translate(0, 0); }
+
+.menu.tools {
+  width: auto; }
+
+.menu.tools .current-tool {
+  width: 14em;
+  height: 14em;
+  position: fixed;
+  background-color: #2d546b;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 4;
+  left: 0;
+  bottom: 0;
+  transform: translate(-50%, 50%); }
+
+.menu.tools ul {
+  width: 26em;
+  height: 26em;
+  position: fixed;
+  z-index: 3;
+  bottom: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  left: 0;
+  bottom: 0;
+  transform: translate(-50%, 50%) scale(1);
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  transition: all .3s ease; }
+
+.menu.tools ul.closed {
+  transform: translate(-50%, 50%) scale(0.7); }
+
+.menu.tools li {
+  position: absolute;
+  font-size: 1.5em;
+  width: 10em;
+  height: 10em;
+  overflow: hidden;
+  -webkit-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+  color: #aaa;
+  left: 50%;
+  top: 50%;
+  margin-left: -10.5em;
+  margin-top: -10.5em;
+  overflow: hidden;
+  background-color: #3b6b84; }
+
+.menu.tools li:hover {
+  background-color: #4a7893; }
+
+.menu.tools li.active {
+  background-color: #4a7893; }
+
+.menu.tools li:first-child {
+  transform: rotate(85deg) skew(65deg); }
+
+.menu.tools li:nth-child(2) {
+  transform: rotate(110deg) skew(65deg); }
+
+.menu.tools li:nth-child(3) {
+  transform: rotate(135deg) skew(65deg); }
+
+.menu.tools li:nth-child(4) {
+  transform: rotate(160deg) skew(65deg); }
+
+.menu.tools a {
+  transform: skew(-65deg) rotate(-82deg) scale(1);
+  border-radius: 50%;
+  text-align: center;
+  padding-top: 2em;
+  display: block;
+  font-size: 1.2em;
+  height: 13.1em;
+  width: 13.1em;
+  position: absolute;
+  bottom: -6.75em;
+  right: -6.75em;
+  text-decoration: none;
+  color: white; }
+
+.menu.all {
+  bottom: 0;
+  padding-left: 13em; }
+
+.menu.trees {
+  display: none;
+  padding-left: 13em; }
+
+.menu.trees.active {
+  display: table;
+  transform: translate(0, 0); }
+
+.menu.terrain {
+  display: none;
+  padding-left: 13em; }
+
+.menu.terrain.active {
+  display: table;
+  transform: translate(0, 0); }
+
+.menu ul {
+  text-align: left;
+  display: table-cell;
+  vertical-align: middle; }
+
+.menu ul li {
+  width: 70px;
+  height: 70px;
+  display: inline-table;
+  vertical-align: middle;
+  padding: 5px;
+  background-color: rgba(238, 238, 238, 0.4);
+  border-radius: 3px;
+  margin-right: 2px; }
+
+.menu ul li.active {
+  background-color: rgba(238, 238, 238, 0.8); }
+
+.menu ul li img {
+  width: 100%; }

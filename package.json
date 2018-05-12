@@ -1,0 +1,35 @@
+{
+  "name": "3DFarm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+  },
+  "engines": {
+    "node": "6.11.2",
+    "npm": "3.10.10"
+  },
+  "author": "Thatiane Pisco",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cache": "^0.4.6",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-include-source": "0.0.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-strip-code": "^0.1.4",
+    "gulp-uglify": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbpisco/3DFarm.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/tbpisco/3DFarm/issues"
+  },
+  "homepage": "https://github.com/tbpisco/3DFarm#readme"
+}
