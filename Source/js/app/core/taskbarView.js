@@ -14,6 +14,7 @@ APP.core.taskbarView = (function() {
         addMenuAll();
         addMenuTrees();
         addMenuTerrain();
+        addEvents();
     };    
 
     var addTaskbarContainer = function(){
@@ -30,12 +31,82 @@ APP.core.taskbarView = (function() {
     };
 
     var createHelpButton = function(){
-        return $('<span class="button help"><a href="#" class="help"><img src="images/help.png" alt=""></a></span>');
+        return $('<a href="#" class="help button"><img src="images/help.png" alt=""></a>');
     };
 
     var addMenuTools = function(){
         self.menuTools = createMenuTools();
         self.view.append(self.menuTools);
+    };
+
+    var addEvents = function(){
+
+         self.menuTools.find("li").on("mouseover", function(event){
+            self.menuTools.find("ul").removeClass("closed");
+        }.bind(this));
+
+        self.menuTools.find("li").on("mouseout", function(event){
+            self.menuTools.find("ul").addClass("closed");
+        }.bind(this));
+
+        self.menuTools.find(".current-tool").on("mouseover", function(event){
+            self.menuTools.find("ul").removeClass("closed");
+        }.bind(this));
+
+        self.menuTools.find(".current-tool").on("mouseout", function(event){
+            self.menuTools.find("ul").addClass("closed");
+        }.bind(this));
+
+
+        self.menuTools.find("li").on("click", function(event){
+
+            self.menuTools.find("li").removeClass("active");
+            $(this).addClass("active");
+
+            self.menuTools.removeClass("active");
+            self.menuTrees.removeClass("active");
+            self.menuTerrain.removeClass("active");
+            self.menuAll.removeClass("active");
+
+            self.menuTools.find(".current-tool div").removeClass("active");
+            $(".mouse-cursor div").removeClass("active");
+
+            self.modeSelected = $(this).attr("data-id");
+
+            if(self.modeSelected == "place-tool"){
+
+                self.menuAll.addClass("active");
+                                 
+            } 
+            $('.mouse-cursor div[data-id="' + self.modeSelected + '"]').addClass("active");
+            $('.current-tool div[data-id="' + self.modeSelected + '"]').addClass("active");
+
+        });
+
+        self.menuAll.find("a.trees-menu").on("click", function(event){
+              self.menuTrees.toggleClass("active");
+              if(self.menuTrees.hasClass("active")){
+                self.menuAll.removeClass("active");
+                self.menuAll.find("ul").toggleClass("active");
+              } 
+              
+              if(self.menuTerrain.hasClass("active")){
+                  self.menuTerrain.removeClass("active");
+                  self.menuAll.find("ul").toggleClass("active");
+              }
+          });
+
+        self.menuAll.find("a.terrain-menu").on("click", function(event){
+              self.menuTerrain.toggleClass("active");
+              if(self.menuTerrain.hasClass("active")){
+                self.menuAll.removeClass("active");
+              } 
+              self.menuAll.find("ul").toggleClass("active");
+              if(self.menuTrees.hasClass("active")){
+                  self.menuTrees.removeClass("active");
+                  self.menuAll.find("ul").toggleClass("active");
+              }
+          });
     };
 
     var createMenuTools = function(){
@@ -131,31 +202,28 @@ APP.core.taskbarView = (function() {
         this.helpButton.on("click", _action);
     };
 
-
-    var addLanguagesContainer = function(){
-        self.languagesView = createLanguageContainer().appendTo(self.view);
+    taskbarView.prototype.addActionTool = function(_action){
+        this.menuTrees.find("a").on("click", _action);
+        this.menuTerrain.find("a").on("click", _action);
     };
 
-    taskbarView.prototype.addLanguageElement = function(_label, _id){
-        return createLanguageElement(_label, _id).appendTo(self.languagesView);
+    taskbarView.prototype.addActionRemove = function(_action){
+        this.menuTools.find('li[data-id="remove-tool"]').on("click", _action);
     };
 
-    var createLanguageContainer = function(){
-        return $('<div class="languages"></div>');
+    taskbarView.prototype.addActionRotate = function(_action){
+        this.menuTools.find('li[data-id="rotate-tool"]').on("click", _action);
     };
 
-    var createLanguageElement = function(_label, _id){
-        return $('<button data-id='+ _id +' class="language-element button"><img src="images/' + _id + '.png"></button>');
+    taskbarView.prototype.addActionTrees = function(_action){
+        self.menuAll.find("a.trees-menu").on("click", _action);
+    };
+
+    taskbarView.prototype.addActionTerrain = function(_action){
+        self.menuAll.find("a.terrain-menu").on("click", _action);
     };
 
     taskbarView.prototype.setupModel = function(_model){
-
-        this.languagesView.html("");
-
-        var languagesList = _model.getLanguages();
-        for (var i = 0, iMax = languagesList.length; i < iMax; i++) {
-            this.addLanguageElement(languagesList[i].label, languagesList[i].typeID);
-        }
         
     };
 

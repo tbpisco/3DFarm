@@ -56,11 +56,11 @@ gulp.task('styles', function () {
 
 gulp.task('watch', function() {
    // Watch .js files
-  gulp.watch('./Source/js/**/**/*.js', ['scripts']);
+  //gulp.watch('./Source/js/**/**/*.js', ['scripts']);
    // Watch .scss files
   gulp.watch('./Source/scss/**/**/*.scss', ['styles']);
    // Watch image files
-  gulp.watch('./Source/imgs/**/*', ['images']);
+ // gulp.watch('./Source/imgs/**/*', ['images']);
  });
 
  // Default Task
