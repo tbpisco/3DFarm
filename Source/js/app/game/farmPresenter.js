@@ -14,6 +14,10 @@ APP.game.farmPresenter = (function() {
 
     farmPresenter.prototype.setupModel = function(model){
         this.model = model;
+
+        if(this.model.getIsMobile()){
+            this.view.addEventsForMobile();
+        }
     };
 
     farmPresenter.prototype.init = function(){ 

@@ -93,6 +93,10 @@ APP.game.farmView = (function() {
         self.controls.damping = 0.2;
     };
 
+    farmView.prototype.addEventsForMobile = function(){
+        window.addEventListener( 'orientationchange', self.updateCanvasSize, false );
+        window.addEventListener( 'deviceorientation', self.updateCanvasSize, false );
+    };
 
     var onProgressObject = function ( xhr ) {
           if ( xhr.lengthComputable ) {
