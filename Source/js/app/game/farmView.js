@@ -313,7 +313,6 @@ APP.game.farmView = (function() {
         self.mark.position.y = 21;
         self.mark.name = "mark";
         self.mark.rotation.x = (270 * Math.PI / 180).toFixed(2);
-        self.scene.add(self.mark);
     };
 
     farmView.prototype.createTexture = function(name, src){

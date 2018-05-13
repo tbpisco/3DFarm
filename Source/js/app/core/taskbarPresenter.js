@@ -10,6 +10,11 @@ APP.core.taskbarPresenter = (function() {
 
     taskbarPresenter.prototype.addTaskbar = function(){
     	this.view.show(this.container);
+
+        if(!this.model.getIsMobile()){
+            this.view.addMouseCursor();
+        }
+
     	this.view.addActionHelp(openHelpScreen); 
         this.view.addActionTool(selectedTool);
         this.view.addActionRemove(selectedRemoveTool);

@@ -34,9 +34,9 @@ APP.core.taskbarView = (function() {
         return $('<a href="#" class="help button"><i class="fas fa-question-circle"></i></a>');
     };
 
-    var addMouseCursor = function(){
-        self.mouseCursor = createMouseCursor();
-        self.view.parent().append(self.mouseCursor);
+    taskbarView.prototype.addMouseCursor = function(){
+        this.mouseCursor = createMouseCursor();
+        this.view.parent().append(this.mouseCursor);
         document.addEventListener( 'mousemove', updateCursorPosition, false );
     };
 
@@ -52,11 +52,13 @@ APP.core.taskbarView = (function() {
     };
 
     var updateCursorPosition = function(event){
+        if(!self.mouseCursor)return;
         self.mouseCursor.css("top", event.clientY + "px");
         self.mouseCursor.css("left", event.clientX + "px");
     };
 
     var changeCursorType = function(mode){
+        if(!self.mouseCursor)return;
         self.mouseCursor.find("div").removeClass("active");
         self.mouseCursor.find('div[data-id="' + mode + '"]').addClass("active");
     };
@@ -258,7 +260,6 @@ APP.core.taskbarView = (function() {
 
     taskbarView.prototype.show = function(container){
         $(container).append(this.view);
-        addMouseCursor();
     };
 
     taskbarView.prototype.hide = function(){

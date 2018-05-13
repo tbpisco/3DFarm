@@ -20,28 +20,26 @@ APP.game.gameScreenPresenter = (function() {
 
     gameScreenPresenter.prototype.openGameScreen = function(){
         this.view.show();
-        this.init();
+       // this.init();
     };
 
-    gameScreenPresenter.prototype.init = function(){ 
+   /* gameScreenPresenter.prototype.init = function(){ 
         
-        this.taskbar.addTaskbar();
-        this.farm.addFarm();
-        this.view.show();
+        
 
-        window.addEventListener("resize", this.resizeWindow.bind(this));
+       // window.addEventListener("resize", this.resizeWindow.bind(this));
 
-        this.resizeWindow();
+       // this.resizeWindow();
 
-    };
+    };*/
 
     gameScreenPresenter.prototype.setupModel = function(model){
         this.taskbar.setupModel(model);
         this.farm.setupModel(model);
-    };
 
-    gameScreenPresenter.prototype.resizeWindow = function(){
-       
+        this.taskbar.addTaskbar();
+        this.farm.addFarm();
+        this.view.show();
     };
 
     return gameScreenPresenter;
