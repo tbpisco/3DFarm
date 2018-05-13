@@ -16,6 +16,26 @@ APP.core.model.gameModel = (function() {
         isMobile = value;
     };
 
+    var objectTypeIdSelected = 0;
+
+    gameModel.prototype.getObjectTypeIdSelected = function(){
+        return objectTypeIdSelected;
+    };
+
+    gameModel.prototype.setObjectTypeIdSelected = function(value){
+        objectTypeIdSelected = value;
+    };
+
+    var menuSelected = -1;
+
+    gameModel.prototype.getMenuSelected = function(){
+        return menuSelected;
+    };
+
+    gameModel.prototype.setMenuSelected = function(value){
+        menuSelected = value;
+    };
+
     return gameModel;
 
 }());

@@ -21,8 +21,7 @@ APP.gameApp = (function() {
 
 		var gameScreenView    = new APP.game.gameScreenView();
 		var gameScreen    = new APP.game.gameScreenPresenter(gameScreenView);
-
-		window.dispatchEvent(window.APP.core.signals.GameEvents.openGameScreenEvent);
+		gameScreen.setupModel(self.gameModel);
 		
 	};
 

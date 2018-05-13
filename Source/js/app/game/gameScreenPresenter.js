@@ -4,7 +4,8 @@ APP.game.gameScreenPresenter = (function() {
 
     function gameScreenPresenter(view){
         this.view = view;
-        window.addEventListener(APP.core.signals.GameEvents.OPEN_GAME_SCREEN, this.openGameScreen.bind(this), false);
+        this.addGameScreen();
+        this.openGameScreen();
     };
 
     gameScreenPresenter.prototype.addGameScreen  = function(){
@@ -19,22 +20,24 @@ APP.game.gameScreenPresenter = (function() {
 
     gameScreenPresenter.prototype.openGameScreen = function(){
         this.view.show();
-        this.addGameScreen();
         this.init();
     };
 
     gameScreenPresenter.prototype.init = function(){ 
         
         this.taskbar.addTaskbar();
-        //this.taskbar.setupModel(this.model);
-        /*this.farm.addFarm();
-        this.farm.setupModel(this.model);
-        this.view.show();*/
+        this.farm.addFarm();
+        this.view.show();
 
         window.addEventListener("resize", this.resizeWindow.bind(this));
 
         this.resizeWindow();
 
+    };
+
+    gameScreenPresenter.prototype.setupModel = function(model){
+        this.taskbar.setupModel(model);
+        this.farm.setupModel(model);
     };
 
     gameScreenPresenter.prototype.resizeWindow = function(){

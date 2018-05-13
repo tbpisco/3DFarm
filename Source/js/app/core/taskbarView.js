@@ -31,7 +31,34 @@ APP.core.taskbarView = (function() {
     };
 
     var createHelpButton = function(){
-        return $('<a href="#" class="help button"><img src="images/help.png" alt=""></a>');
+        return $('<a href="#" class="help button"><i class="fas fa-question-circle"></i></a>');
+    };
+
+    var addMouseCursor = function(){
+        self.mouseCursor = createMouseCursor();
+        self.view.parent().append(self.mouseCursor);
+        document.addEventListener( 'mousemove', updateCursorPosition, false );
+    };
+
+    var createMouseCursor = function(){
+        var html = '';
+        html += '<div class="mouse-cursor">';
+        html += '    <div data-id="view-tool" class="active"><i class="fas fa-eye"></i></div>';
+        html += '    <div data-id="place-tool"><i class="far fa-edit"></i></div>'; 
+        html += '    <div data-id="rotate-tool"><i class="fas fa-undo-alt"></i></div>'; 
+        html += '    <div data-id="remove-tool"><i class="far fa-trash-alt"></i></div>'; 
+        html += '</div>';
+        return $(html);
+    };
+
+    var updateCursorPosition = function(event){
+        self.mouseCursor.css("top", event.clientY + "px");
+        self.mouseCursor.css("left", event.clientX + "px");
+    };
+
+    var changeCursorType = function(mode){
+        self.mouseCursor.find("div").removeClass("active");
+        self.mouseCursor.find('div[data-id="' + mode + '"]').addClass("active");
     };
 
     var addMenuTools = function(){
@@ -72,6 +99,8 @@ APP.core.taskbarView = (function() {
             $(".mouse-cursor div").removeClass("active");
 
             self.modeSelected = $(this).attr("data-id");
+
+            changeCursorType(self.modeSelected);
 
             if(self.modeSelected == "place-tool"){
 
@@ -115,13 +144,13 @@ APP.core.taskbarView = (function() {
 
         html += '<div class="menu tools"><div class="current-tool">';
         html += '    <div data-id="view-tool" class="active"><i class="fas fa-eye"></i></div>';
-        html += '    <div data-id="place-tool"><i class="fas fa-plus"></i></div>';
+        html += '    <div data-id="place-tool"><i class="far fa-edit"></i></div>';
         html += '    <div data-id="rotate-tool"><i class="fas fa-undo-alt"></i></div>';
         html += '    <div data-id="remove-tool"><i class="far fa-trash-alt"></i></div>';
         html += '</div>';
         html += '<ul class="closed">';
         html += '    <li data-id="view-tool" class="active"><a href="#"><i class="fas fa-eye"></i></a></li>';
-        html += '    <li data-id="place-tool"><a href="#"><i class="fas fa-plus"></i></a></li>';
+        html += '    <li data-id="place-tool"><a href="#"><i class="far fa-edit"></i></a></li>';
         html += '    <li data-id="rotate-tool"><a href="#"><i class="fas fa-undo-alt"></i></a></li>'; 
         html += '    <li data-id="remove-tool"><a href="#"><i class="far fa-trash-alt"></i></a></li>';   
         html += '</ul></div>';
@@ -229,6 +258,7 @@ APP.core.taskbarView = (function() {
 
     taskbarView.prototype.show = function(container){
         $(container).append(this.view);
+        addMouseCursor();
     };
 
     taskbarView.prototype.hide = function(){
