@@ -1,5 +1,4 @@
 #game-screen{
-	position: absolute;
 	width:100%;
 	height: 100%;
 	background-color: green;
@@ -9,4 +8,7 @@
 
 body{
 	background-color: black;
+	position: fixed;
+	width:100%;
+	height: 100%;
 }

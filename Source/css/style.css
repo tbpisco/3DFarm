@@ -375,7 +375,6 @@ div#help-screen {
   height: 100%; }
 
 #game-screen {
-  position: absolute;
   width: 100%;
   height: 100%;
   background-color: green;
@@ -383,4 +382,7 @@ div#help-screen {
   overflow: hidden; }
 
 body {
-  background-color: black; }
+  background-color: black;
+  position: fixed;
+  width: 100%;
+  height: 100%; }
