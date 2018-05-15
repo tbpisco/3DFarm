@@ -70,24 +70,123 @@ APP.core.taskbarView = (function() {
 
     var addEvents = function(){
 
-         self.menuTools.find("li").on("mouseover", function(event){
-            self.menuTools.find("ul").removeClass("closed");
+       /* self.menuTools.find(".menu-mode > li:last-child").on("mouseover", function(event){
+            self.menuTools.find("ul.menu-build").removeClass("closed");
+        }.bind(this));*/
+
+        self.menuTools.find(".menu-mode > li:first-child").on("click", function(event){
+            self.menuTools.find("ul.menu-build").removeClass("active");
+            self.menuTools.find("ul.menu-view").addClass("active");
+
+
+               self.menuTools.find("ul.menu-build").removeClass("active"); 
+
+               self.menuTools.find("li").removeClass("active");
+               self.menuTools.find('li[data-id="view-tool"]').addClass("active");
+
+                self.menuTools.removeClass("active");
+                self.menuTrees.removeClass("active");
+                self.menuTerrain.removeClass("active");
+                self.menuAll.removeClass("active");
+
+                self.menuTools.find(".current-tool div").removeClass("active");
+                $(".mouse-cursor div").removeClass("active");
+
+                self.modeSelected = "view-tool";
+
+                changeCursorType(self.modeSelected);
+
+                $('.mouse-cursor div[data-id="' + self.modeSelected + '"]').addClass("active");
+                $('.current-tool div[data-id="' + self.modeSelected + '"]').addClass("active");
         }.bind(this));
 
-        self.menuTools.find("li").on("mouseout", function(event){
-            self.menuTools.find("ul").addClass("closed");
+         self.menuTools.find(".menu-mode > li:last-child").on("click", function(event){
+
+            self.menuTools.find("ul.menu-build").addClass("active");
+            self.menuTools.find("ul.menu-view").removeClass("active");
+           
+            self.menuTools.find("ul.menu-view").removeClass("active"); 
+
+            self.menuTools.find("li").removeClass("active");
+            self.menuTools.find('li[data-id="place-tool"]').addClass("active");
+
+            self.menuTools.removeClass("active");
+            self.menuTrees.removeClass("active");
+            self.menuTerrain.removeClass("active");
+            self.menuAll.removeClass("active");
+
+            self.menuTools.find(".current-tool div").removeClass("active");
+            $(".mouse-cursor div").removeClass("active");
+
+            self.modeSelected = "place-tool";
+
+            changeCursorType(self.modeSelected);
+
+            if(self.modeSelected == "place-tool"){
+                self.menuAll.addClass("active");                  
+            } 
+
+            $('.mouse-cursor div[data-id="' + self.modeSelected + '"]').addClass("active");
+            $('.current-tool div[data-id="' + self.modeSelected + '"]').addClass("active");
+
         }.bind(this));
 
-        self.menuTools.find(".current-tool").on("mouseover", function(event){
-            self.menuTools.find("ul").removeClass("closed");
+        self.menuTools.find(".menu-build > li").on("mouseover", function(event){
+            self.menuTools.find("ul.menu-build").removeClass("closed");
+        }.bind(this));
+
+        self.menuTools.find(".menu-build > li").on("mouseout", function(event){
+            self.menuTools.find("ul.menu-build").addClass("closed");
+        }.bind(this));
+
+        self.menuTools.find(".menu-view > li").on("mouseover", function(event){
+            self.menuTools.find("ul.menu-view").removeClass("closed");
+        }.bind(this));
+
+        self.menuTools.find(".menu-view > li").on("mouseout", function(event){
+            self.menuTools.find("ul.menu-view").addClass("closed");
+        }.bind(this));
+
+        self.menuTools.find(".menu-mode > li").on("mouseover", function(event){
+            self.menuTools.find("ul.menu-mode").removeClass("closed");
+        }.bind(this));
+
+        self.menuTools.find(".menu-mode > li").on("mouseout", function(event){
+            self.menuTools.find("ul.menu-mode").addClass("closed");
+        }.bind(this));
+
+        /*self.menuTools.find(".menu-mode > li:last-child").on("mouseover", function(event){
+            self.menuTools.find("ul.menu-build").addClass("tog");
+        }.bind(this));
+
+        self.menuTools.find(".menu-mode > li:last-child").on("mouseout", function(event){
+            self.menuTools.find("ul.menu-build").removeClass("tog");
+        }.bind(this));
+
+        self.menuTools.find(".menu-mode > li:first-child").on("mouseover", function(event){
+            self.menuTools.find("ul.menu-view").addClass("tog");
+            self.menuTools.find("ul.menu-view").removeClass("closed");
+        }.bind(this));
+
+        self.menuTools.find(".menu-mode > li:first-child").on("mouseout", function(event){
+            self.menuTools.find("ul.menu-view").removeClass("tog");
+            self.menuTools.find("ul.menu-view").addClass("closed");
+        }.bind(this));*/
+
+        /*self.menuTools.find(".current-tool").on("mouseover", function(event){
+            self.menuTools.find("ul.menu-mode").removeClass("closed");
         }.bind(this));
 
         self.menuTools.find(".current-tool").on("mouseout", function(event){
-            self.menuTools.find("ul").addClass("closed");
-        }.bind(this));
+            self.menuTools.find("ul.menu-mode").addClass("closed");
+        }.bind(this));*/
 
 
         self.menuTools.find("li").on("click", function(event){
+
+            self.modeSelected = $(this).attr("data-id");
+
+            if(self.modeSelected == "menu-view-tool" || self.modeSelected == "menu-build-tool")return;
 
             self.menuTools.find("li").removeClass("active");
             $(this).addClass("active");
@@ -100,7 +199,7 @@ APP.core.taskbarView = (function() {
             self.menuTools.find(".current-tool div").removeClass("active");
             $(".mouse-cursor div").removeClass("active");
 
-            self.modeSelected = $(this).attr("data-id");
+            
 
             changeCursorType(self.modeSelected);
 
@@ -145,16 +244,25 @@ APP.core.taskbarView = (function() {
         var html = '';
 
         html += '<div class="menu tools"><div class="current-tool">';
+        html += '    <div data-id="menu-view-tool" class="active"><i class="fas fa-eye"></i></div>';
+        html += '    <div data-id="menu-build-tool"><i class="far fa-edit"></i></div>';
         html += '    <div data-id="view-tool" class="active"><i class="fas fa-eye"></i></div>';
         html += '    <div data-id="place-tool"><i class="far fa-edit"></i></div>';
         html += '    <div data-id="rotate-tool"><i class="fas fa-undo-alt"></i></div>';
         html += '    <div data-id="remove-tool"><i class="far fa-trash-alt"></i></div>';
         html += '</div>';
-        html += '<ul class="closed">';
-        html += '    <li data-id="view-tool" class="active"><a href="#"><i class="fas fa-eye"></i></a></li>';
+        html += '<ul class="menu-mode active closed">';
+        html += '    <li data-id="menu-view-tool" class="active"><a href="#"><i class="fas fa-eye"></i></a></li>';
+        html += '    <li data-id="menu-build-tool"><a href="#"><i class="far fa-edit"></i></a></li>';
+        html += '</ul>';
+        html += '<ul class="menu-build closed">';
         html += '    <li data-id="place-tool"><a href="#"><i class="far fa-edit"></i></a></li>';
         html += '    <li data-id="rotate-tool"><a href="#"><i class="fas fa-undo-alt"></i></a></li>'; 
         html += '    <li data-id="remove-tool"><a href="#"><i class="far fa-trash-alt"></i></a></li>';   
+        html += '</ul>';
+        html += '<ul class="menu-view closed">';
+        html += '    <li data-id="view-tool" class="active"><a href="#"><i class="fas fa-eye"></i></a></li>';
+        html += '    <li data-id="cardboard-tool"><a href="#"><img class="cardboard-icon" src="images/cardboard.svg"></a></li>';
         html += '</ul></div>';
 
         return $(html);
@@ -231,6 +339,10 @@ APP.core.taskbarView = (function() {
 
     taskbarView.prototype.addActionHelp = function(_action){
         this.helpButton.on("click", _action);
+    };
+
+    taskbarView.prototype.addActionVr = function(_action){
+        self.menuTools.find('.menu-view li[data-id="cardboard-tool"]').on("click", _action);
     };
 
     taskbarView.prototype.addActionTool = function(_action){

@@ -15,6 +15,7 @@ APP.core.taskbarPresenter = (function() {
             this.view.addMouseCursor();
         }
 
+        this.view.addActionVr(openVrScreen); 
     	this.view.addActionHelp(openHelpScreen); 
         this.view.addActionTool(selectedTool);
         this.view.addActionRemove(selectedRemoveTool);
@@ -34,6 +35,14 @@ APP.core.taskbarPresenter = (function() {
 
     var openHelpScreen = function(){
     	window.dispatchEvent(window.APP.core.signals.GameEvents.openHelpEvent);
+    };
+
+    var openVrScreen = function(){
+        if(self.model.getIsMobile()){
+             window.dispatchEvent(window.APP.core.signals.GameEvents.enableVr);
+        } else {
+            window.dispatchEvent(window.APP.core.signals.GameEvents.openVrEvent);
+        }
     };
 
     var selectedTool = function(){

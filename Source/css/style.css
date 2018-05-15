@@ -62,6 +62,25 @@ table {
 .isInvisible {
   display: none !important; }
 
+div#vr-screen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 4;
+  color: black;
+  background-color: rgba(0, 0, 0, 0.8); }
+  div#vr-screen .container {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+    div#vr-screen .container img {
+      width: 2%; }
+
 a.help {
   font-size: 4em;
   color: white;
@@ -127,8 +146,8 @@ div#help-screen {
   display: table;
   width: 5em;
   height: 5em;
-  margin-left: 7em;
-  margin-top: 1.5em;
+  margin-left: 6em;
+  margin-top: 1em;
   text-align: center; }
 
 .current-tool div.active i {
@@ -158,14 +177,14 @@ div#help-screen {
   width: auto; }
 
 .menu.tools .current-tool {
-  width: 14em;
-  height: 14em;
+  width: 12em;
+  height: 12em;
   position: fixed;
   background-color: #2d546b;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  z-index: 4;
+  z-index: 5;
   left: 0;
   bottom: 0;
   transform: translate(-50%, 50%); }
@@ -174,19 +193,30 @@ div#help-screen {
   width: 26em;
   height: 26em;
   position: fixed;
-  z-index: 3;
+  z-index: 4;
   bottom: 0;
   border-radius: 50%;
   overflow: hidden;
+  display: none;
   left: 0;
   bottom: 0;
-  transform: translate(-50%, 50%) scale(1);
   -webkit-transition: all .3s ease;
   -moz-transition: all .3s ease;
   transition: all .3s ease; }
+  .menu.tools ul.menu-view, .menu.tools ul.menu-build {
+    z-index: 3;
+    width: 27em;
+    height: 27em;
+    transform: translate(-50%, 50%) scale(1.1); }
+  .menu.tools ul.menu-mode {
+    transform: translate(-50%, 50%) scale(0.7); }
+  .menu.tools ul.active {
+    display: block; }
 
 .menu.tools ul.closed {
   transform: translate(-50%, 50%) scale(0.7); }
+  .menu.tools ul.closed.menu-view, .menu.tools ul.closed.menu-build {
+    transform: translate(-50%, 50%) scale(0.9); }
 
 .menu.tools li {
   position: absolute;
@@ -206,23 +236,70 @@ div#help-screen {
   overflow: hidden;
   background-color: #3b6b84; }
 
+.menu.tools.menu-view {
+  margin-left: -10.5em;
+  margin-top: -10.5em;
+  width: 10em;
+  height: 10em; }
+
 .menu.tools li:hover {
   background-color: #4a7893; }
 
 .menu.tools li.active {
   background-color: #4a7893; }
 
-.menu.tools li:first-child {
-  transform: rotate(85deg) skew(65deg); }
+.menu.tools .menu-mode li {
+  background-color: #008993; }
+  .menu.tools .menu-mode li a {
+    transform: skew(-40deg) rotate(-70deg) scale(1); }
+  .menu.tools .menu-mode li:hover {
+    background-color: #008993; }
+  .menu.tools .menu-mode li.active {
+    background-color: #008993; }
 
-.menu.tools li:nth-child(2) {
-  transform: rotate(110deg) skew(65deg); }
+.menu.tools .menu-mode li:first-child {
+  transform: rotate(87deg) skew(40deg); }
 
-.menu.tools li:nth-child(3) {
-  transform: rotate(135deg) skew(65deg); }
+.menu.tools .menu-mode li:nth-child(2) {
+  transform: rotate(136deg) skew(40deg);
+  background-color: #74ac2d; }
+  .menu.tools .menu-mode li:nth-child(2):hover {
+    background-color: #74ac2d; }
+  .menu.tools .menu-mode li:nth-child(2).active {
+    background-color: #74ac2d; }
 
-.menu.tools li:nth-child(4) {
-  transform: rotate(160deg) skew(65deg); }
+.menu.tools .menu-view li {
+  background-color: #03949f; }
+  .menu.tools .menu-view li a {
+    transform: skew(-40deg) rotate(-70deg) scale(1); }
+  .menu.tools .menu-view li:hover {
+    background-color: #02a3af; }
+  .menu.tools .menu-view li.active {
+    background-color: #02a3af; }
+
+.menu.tools .menu-view li:first-child {
+  transform: rotate(87deg) skew(40deg); }
+
+.menu.tools .menu-view li:nth-child(2) {
+  transform: rotate(136deg) skew(40deg); }
+
+.menu.tools .menu-build li {
+  background-color: #73b223; }
+  .menu.tools .menu-build li a {
+    transform: skew(-60deg) rotate(-80deg) scale(1); }
+  .menu.tools .menu-build li:hover {
+    background-color: #87d129; }
+  .menu.tools .menu-build li.active {
+    background-color: #87d129; }
+
+.menu.tools .menu-build li:first-child {
+  transform: rotate(90deg) skew(60deg); }
+
+.menu.tools .menu-build li:nth-child(2) {
+  transform: rotate(120deg) skew(60deg); }
+
+.menu.tools .menu-build li:nth-child(3) {
+  transform: rotate(150deg) skew(60deg); }
 
 .menu.tools a {
   transform: skew(-65deg) rotate(-82deg) scale(1);
@@ -279,13 +356,19 @@ div#help-screen {
 
 .menu ul li img {
   width: 100%; }
+  .menu ul li img.cardboard-icon {
+    width: 1.5em; }
+
+.menu-view,
+.menu-build {
+  display: none; }
 
 #farm {
   position: absolute;
   width: 100%;
   height: 100%; }
 
-canvas {
+#farm-canvas {
   z-index: 1;
   position: absolute;
   width: 100%;

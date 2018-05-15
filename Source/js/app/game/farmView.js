@@ -7,6 +7,7 @@ APP.game.farmView = (function() {
     function farmView(){
         self = this;
         self.VRViewEnabled = false;
+
         this.init();
     };
 
@@ -46,10 +47,9 @@ APP.game.farmView = (function() {
     var addCamera = function(){
         if(self.VRViewEnabled){
 
-            self.camera = new THREE.PerspectiveCamera(45, self.widthApp / self.heightApp, 0.1, 000);
-            //self.camera.position.set( 200,700,800);
-            self.camera.position.set(100,10,10);
-            self.camera.lookAt(new THREE.Vector3(0, 0, 0));
+            self.camera = new THREE.PerspectiveCamera(45, self.widthApp / self.heightApp, 0.1, 20000);
+            self.camera.position.set( 200,700,800);
+            //self.camera.position.set(100,10,10);
 
             
         } else {
@@ -59,6 +59,22 @@ APP.game.farmView = (function() {
         }
         
         self.scene.add(self.camera);
+    };
+
+    farmView.prototype.enableVr = function(){
+      this.VRViewEnabled = !this.VRViewEnabled;
+      resetCameraControls();
+      addCamera();
+      addControls();
+      if(self.VRViewEnabled)self.effect = new THREE.StereoEffect(self.renderer);
+      self.updateCanvasSize();
+    };
+
+    var resetCameraControls = function(){
+        self.scene.remove(self.camera);
+        self.camera = null;
+        self.controls = null;
+        self.effect = null;
     };
 
     var addLight = function(){
@@ -84,6 +100,9 @@ APP.game.farmView = (function() {
 
     var addEvents = function(){
         self.raycaster = new THREE.Raycaster();
+    };
+
+    var addControls = function(){
         if(self.VRViewEnabled){
             self.controls = new THREE.DeviceOrientationControls(self.camera);
            // self.controls = new THREE.OrbitControls( self.camera , self.canvas[0]);
@@ -405,11 +424,7 @@ APP.game.farmView = (function() {
 
         if(self.VRViewEnabled){
             
-            self.renderer.setViewport(0, 0, self.widthApp/2, self.heightApp);
-            self.renderer.render(self.scene, self.camera);
-
-            self.renderer.setViewport(self.widthApp/2, 0, self.widthApp/2, self.heightApp);
-            self.renderer.render(self.scene, self.camera);
+            self.effect.render(self.scene, self.camera);
 
         } else {
 
@@ -476,6 +491,7 @@ APP.game.farmView = (function() {
         addCamera();
         addLight();
         addEvents();
+        addControls();
         addModels();
         animate();
     };

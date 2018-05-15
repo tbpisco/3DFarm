@@ -5,6 +5,12 @@ APP.game.farmPresenter = (function() {
     function farmPresenter(view){
         self = this;
         this.view = view;
+
+        window.addEventListener(APP.core.signals.GameEvents.ENABLE_VR, this.enableVr.bind(this), false);
+    };
+
+    farmPresenter.prototype.enableVr = function(){
+        this.view.enableVr();
     };
 
     farmPresenter.prototype.addFarm = function(){
