@@ -17,6 +17,7 @@ APP.gameApp = (function() {
 		
 		var helpScreenView    = new APP.core.helpScreenView();
 		var helpScreen    = new APP.core.helpScreenPresenter(helpScreenView);
+		helpScreen.setupModel(self.gameModel);
 
 		var vrScreenView    = new APP.core.VrScreenView();
 		var vrScreen    = new APP.core.VrScreenPresenter(vrScreenView);

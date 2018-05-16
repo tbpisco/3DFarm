@@ -20,18 +20,7 @@ APP.game.gameScreenPresenter = (function() {
 
     gameScreenPresenter.prototype.openGameScreen = function(){
         this.view.show();
-       // this.init();
     };
-
-   /* gameScreenPresenter.prototype.init = function(){ 
-        
-        
-
-       // window.addEventListener("resize", this.resizeWindow.bind(this));
-
-       // this.resizeWindow();
-
-    };*/
 
     gameScreenPresenter.prototype.setupModel = function(model){
         this.taskbar.setupModel(model);

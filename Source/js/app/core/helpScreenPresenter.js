@@ -10,11 +10,17 @@ APP.core.helpScreenPresenter = (function() {
     }
 
     helpScreenPresenter.prototype.setupModel = function(_model){
-        model = _model;
-        this.view.setupModel(model);
+        this.model = _model;
     };
 
     helpScreenPresenter.prototype.openHelpScreen = function(){
+        var content;
+        if(this.model.getIsMobile()){
+            content = new APP.core.helpMobileViewContentBuilder();
+        }else {
+            content = new APP.core.helpDesktopViewContentBuilder();
+        }
+        this.view.addHelpScreenContainer(new APP.core.viewContentBuilder().build(content));
         this.view.addActionMode(closeHelpScreen);
         this.view.show();
     };
