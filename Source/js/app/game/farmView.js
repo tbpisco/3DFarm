@@ -46,16 +46,11 @@ APP.game.farmView = (function() {
 
     var addCamera = function(){
         if(self.VRViewEnabled){
-
-            self.camera = new THREE.PerspectiveCamera(45, self.widthApp / self.heightApp, 0.1, 20000);
-            self.camera.position.set( 200,700,800);
-            //self.camera.position.set(100,10,10);
-
-            
+            self.camera = new THREE.PerspectiveCamera(95, self.widthApp/2 / self.heightApp, 0.001, 700);
+            self.camera.position.set( 100,100,100);
         } else {
             self.camera = new THREE.PerspectiveCamera(45, self.widthApp / self.heightApp, 0.1, 20000);
             self.camera.position.set( 200,700,800);
-
         }
         
         self.scene.add(self.camera);
