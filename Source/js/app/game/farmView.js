@@ -6,12 +6,10 @@ APP.game.farmView = (function() {
 
     function farmView(){
         self = this;
-        self.VRViewEnabled = false;
-
-        this.init();
     };
 
-    farmView.prototype.init = function(){
+    farmView.prototype.init = function(enabled){
+        this.VRViewEnabled = enabled;
         addFarmContainer();
         addCanvasElement();
     };
@@ -46,7 +44,7 @@ APP.game.farmView = (function() {
 
     var addCamera = function(){
         if(self.VRViewEnabled){
-            self.camera = new THREE.PerspectiveCamera(95, self.widthApp/2 / self.heightApp, 0.001, 700);
+            self.camera = new THREE.PerspectiveCamera(95, self.widthApp/self.heightApp, 0.001, 700);
             self.camera.position.set( 100,100,100);
         } else {
             self.camera = new THREE.PerspectiveCamera(45, self.widthApp / self.heightApp, 0.1, 20000);
@@ -66,7 +64,7 @@ APP.game.farmView = (function() {
     };
 
     var resetCameraControls = function(){
-        self.scene.remove(self.camera);
+        if(self.scene)self.scene.remove(self.camera);
         self.camera = null;
         self.controls = null;
         self.effect = null;
@@ -488,6 +486,7 @@ APP.game.farmView = (function() {
         addEvents();
         addControls();
         addModels();
+        if(self.VRViewEnabled)self.effect = new THREE.StereoEffect(self.renderer);
         animate();
     };
 

@@ -16,6 +16,16 @@ APP.core.model.gameModel = (function() {
         isMobile = value;
     };
 
+    var vrEnabled = false;
+
+    gameModel.prototype.getVrEnabled = function(){
+        return vrEnabled;
+    };
+
+    gameModel.prototype.setVrEnabled = function(value){
+        vrEnabled = value;
+    };
+
     var objectTypeIdSelected = 0;
 
     gameModel.prototype.getObjectTypeIdSelected = function(){

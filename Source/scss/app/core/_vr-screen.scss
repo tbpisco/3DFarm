@@ -8,17 +8,37 @@ div#vr-screen {
     background-color: rgba(0, 0, 0, 0.8);
 
 	.container {
-	    width: 80%;
+	    color: white;
+	    padding: 2%;
+	    border-radius: 0.5em;
 	    text-align: center;
 	    margin: 0 auto;
-	    background-color: rgba(255, 255, 255, 0.8);
+	    background-color: rgb(59, 84, 136);
 	    position: absolute;
 	    top: 50%;
 	    left: 50%;
 	    transform: translate(-50%,-50%);
-
-	     img {
-		    width: 2%;
-		}
 	}
+
+	h1,p{
+		margin-bottom: 2%;
+	}
+
+	button{
+		cursor: pointer;
+    	border: none;
+    	vertical-align: middle;
+    	box-sizing: border-box;
+    	position: absolute;
+    	right: 0;
+    	top: 0;
+    	font-size: 1.5em;
+    	color: white;
+    	border-radius: 50%;
+    	background-color: #3b5488;
+	}
+}
+
+#qr-code{
+	padding: 5%;
 }

@@ -10,10 +10,11 @@ APP.core.VrScreenView = (function() {
 
     VrScreenView.prototype.addScreenContainer = function(){
         this.view = createScreenContainer();
+        addCloseButton();
         addTitleContainer();
         addInstructionContainer();
         addQRCode();
-        addCloseButton();
+        
     };
 
     var addTitleContainer = function(){
@@ -30,7 +31,7 @@ APP.core.VrScreenView = (function() {
     };
 
     var createCloseButton = function(){
-        return $('<button class="close-button">OK</button>');
+        return $('<button class="close-button"><i class="far fa-times-circle"></i></button>');
     };
 
     var createScreenContainer = function(){
@@ -38,14 +39,14 @@ APP.core.VrScreenView = (function() {
     };
 
     var createTitleContainer = function(){
-        return $('<div class="title">VR CARDBOARD</div>');
+        return $('<h1 class="title">VR CARDBOARD</h1>');
     };
 
     var createInstructionContainer = function(){
 
         var html = '';
-        html += '<div class="instruction"> INSTRUCTIONS ABOUT VR CARDBOX GOES HERE';
-        html += '   </div>';
+        html += '<p class="instruction">Scan with your smartphone to access the VR Mode.';
+        html += '   </p>';
         return $(html);
     };
 
@@ -56,7 +57,7 @@ APP.core.VrScreenView = (function() {
     var addQRCode = function(){
         self.qrCode = createQRCode();
         self.view.find(".container").append(self.qrCode);
-        self.qrCode.qrcode({width: 128, height:128, text: window.location.href + "?vr=true"});
+        self.qrCode.qrcode({width: 256, height:256, text: window.location.href.split("?")[0] + "?vr=true"});
     };
 
     VrScreenView.prototype.addActionMode = function(_action){
