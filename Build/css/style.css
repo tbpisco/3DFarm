@@ -229,8 +229,8 @@ div#help-screen {
 .menu.tools li {
   position: absolute;
   font-size: 1.5em;
-  width: 10em;
-  height: 10em;
+  width: 11em;
+  height: 11em;
   overflow: hidden;
   -webkit-transform-origin: 100% 100%;
   transform-origin: 100% 100%;
@@ -239,8 +239,8 @@ div#help-screen {
   color: #aaa;
   left: 50%;
   top: 50%;
-  margin-left: -10.5em;
-  margin-top: -10.5em;
+  margin-left: -11em;
+  margin-top: -11em;
   overflow: hidden;
   background-color: #3b6b84; }
 
@@ -259,7 +259,7 @@ div#help-screen {
 .menu.tools .menu-mode li {
   background-color: #008993; }
   .menu.tools .menu-mode li a {
-    transform: skew(-40deg) rotate(-70deg) scale(1); }
+    transform: skew(-40deg) rotate(-65deg) scale(1); }
   .menu.tools .menu-mode li:hover {
     background-color: #008993; }
   .menu.tools .menu-mode li.active {
@@ -294,35 +294,41 @@ div#help-screen {
 .menu.tools .menu-build li {
   background-color: #73b223; }
   .menu.tools .menu-build li a {
-    transform: skew(-60deg) rotate(-80deg) scale(1); }
+    transform: skew(-60deg) rotate(-75deg) scale(1); }
   .menu.tools .menu-build li:hover {
     background-color: #87d129; }
   .menu.tools .menu-build li.active {
     background-color: #87d129; }
 
 .menu.tools .menu-build li:first-child {
-  transform: rotate(90deg) skew(60deg); }
+  transform: rotate(88deg) skew(60deg); }
 
 .menu.tools .menu-build li:nth-child(2) {
-  transform: rotate(120deg) skew(60deg); }
+  transform: rotate(118deg) skew(60deg); }
 
 .menu.tools .menu-build li:nth-child(3) {
-  transform: rotate(150deg) skew(60deg); }
+  transform: rotate(148deg) skew(60deg); }
 
 .menu.tools a {
-  transform: skew(-65deg) rotate(-82deg) scale(1);
+  transform: skew(-65deg) rotate(-65deg) scale(1);
   border-radius: 50%;
   text-align: center;
-  padding-top: 2em;
   display: block;
   font-size: 1.2em;
-  height: 13.1em;
-  width: 13.1em;
+  height: 14em;
+  width: 14em;
   position: absolute;
-  bottom: -6.75em;
-  right: -6.75em;
+  bottom: -7em;
+  right: -7em;
   text-decoration: none;
   color: white; }
+
+.menu.tools .menu-view a {
+  transform: skew(-65deg) rotate(-80deg) scale(1);
+  width: 14em;
+  height: 14em;
+  bottom: -7em;
+  right: -7em; }
 
 .menu.all {
   bottom: 0;
@@ -385,13 +391,19 @@ div#help-screen {
 #game-screen {
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: green;
   color: white;
   overflow: hidden; }
 
 body {
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: black;
-  position: fixed;
   width: 100%;
   height: 100%;
-  font-family: sans-serif; }
+  font-family: sans-serif;
+  touch-action: none; }

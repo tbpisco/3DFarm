@@ -74,7 +74,7 @@ APP.core.taskbarView = (function() {
             self.menuTools.find("ul.menu-build").removeClass("closed");
         }.bind(this));*/
 
-        self.menuTools.find(".menu-mode > li:first-child").on("click", function(event){
+        self.menuTools.find(".menu-mode > li:first-child > a").on("click", function(event){
             self.menuTools.find("ul.menu-build").removeClass("active");
             self.menuTools.find("ul.menu-view").addClass("active");
 
@@ -100,7 +100,7 @@ APP.core.taskbarView = (function() {
                 $('.current-tool div[data-id="' + self.modeSelected + '"]').addClass("active");
         }.bind(this));
 
-         self.menuTools.find(".menu-mode > li:last-child").on("click", function(event){
+         self.menuTools.find(".menu-mode > li:last-child > a").on("click", function(event){
 
             self.menuTools.find("ul.menu-build").addClass("active");
             self.menuTools.find("ul.menu-view").removeClass("active");
@@ -131,27 +131,27 @@ APP.core.taskbarView = (function() {
 
         }.bind(this));
 
-        self.menuTools.find(".menu-build > li").on("mouseover", function(event){
+        self.menuTools.find(".menu-build > li > a").on("mouseover", function(event){
             self.menuTools.find("ul.menu-build").removeClass("closed");
         }.bind(this));
 
-        self.menuTools.find(".menu-build > li").on("mouseout", function(event){
+        self.menuTools.find(".menu-build > li > a").on("mouseout", function(event){
             self.menuTools.find("ul.menu-build").addClass("closed");
         }.bind(this));
 
-        self.menuTools.find(".menu-view > li").on("mouseover", function(event){
+        self.menuTools.find(".menu-view > li  > a").on("mouseover", function(event){
             self.menuTools.find("ul.menu-view").removeClass("closed");
         }.bind(this));
 
-        self.menuTools.find(".menu-view > li").on("mouseout", function(event){
+        self.menuTools.find(".menu-view > li  > a").on("mouseout", function(event){
             self.menuTools.find("ul.menu-view").addClass("closed");
         }.bind(this));
 
-        self.menuTools.find(".menu-mode > li").on("mouseover", function(event){
+        self.menuTools.find(".menu-mode > li > a").on("mouseover", function(event){
             self.menuTools.find("ul.menu-mode").removeClass("closed");
         }.bind(this));
 
-        self.menuTools.find(".menu-mode > li").on("mouseout", function(event){
+        self.menuTools.find(".menu-mode > li > a").on("mouseout", function(event){
             self.menuTools.find("ul.menu-mode").addClass("closed");
         }.bind(this));
 
@@ -182,14 +182,14 @@ APP.core.taskbarView = (function() {
         }.bind(this));*/
 
 
-        self.menuTools.find("li").on("click", function(event){
+        self.menuTools.find("li > a").on("click", function(event){
 
-            self.modeSelected = $(this).attr("data-id");
+            self.modeSelected = $(this).parent().attr("data-id");
 
             if(self.modeSelected == "menu-view-tool" || self.modeSelected == "menu-build-tool")return;
 
             self.menuTools.find("li").removeClass("active");
-            $(this).addClass("active");
+            $(this).parent().addClass("active");
 
             self.menuTools.removeClass("active");
             self.menuTrees.removeClass("active");
@@ -206,8 +206,17 @@ APP.core.taskbarView = (function() {
             if(self.modeSelected == "place-tool"){
 
                 self.menuAll.addClass("active");
+                self.menuTools.find("ul.menu-build").removeClass("active");
                                  
-            } 
+            } else if(self.modeSelected == "view-tool" || self.modeSelected == "cardboard-tool" ){
+
+                self.menuTools.find("ul.menu-view").removeClass("active");
+
+            } else if(self.modeSelected == "remove-tool" || self.modeSelected == "rotate-tool" ){
+
+                self.menuTools.find("ul.menu-build").removeClass("active");
+                
+            }
             $('.mouse-cursor div[data-id="' + self.modeSelected + '"]').addClass("active");
             $('.current-tool div[data-id="' + self.modeSelected + '"]').addClass("active");
 
@@ -261,8 +270,8 @@ APP.core.taskbarView = (function() {
         html += '    <li data-id="remove-tool"><a href="#"><i class="far fa-trash-alt"></i></a></li>';   
         html += '</ul>';
         html += '<ul class="menu-view closed">';
-        html += '    <li data-id="view-tool" class="active"><a href="#"><i class="fas fa-eye"></i></a></li>';
-        html += '    <li data-id="cardboard-tool"><a href="#"><img class="cardboard-icon" src="images/cardboard.svg"></a></li>';
+        html += '    <li data-id="view-tool" class="active"><a href="#"><span><i class="fas fa-eye"></i></span></a></li>';
+        html += '    <li data-id="cardboard-tool"><a href="#"><span><img class="cardboard-icon" src="images/cardboard.svg"</span></a></li>';
         html += '</ul></div>';
 
         return $(html);
@@ -342,7 +351,7 @@ APP.core.taskbarView = (function() {
     };
 
     taskbarView.prototype.addActionVr = function(_action){
-        self.menuTools.find('.menu-view li[data-id="cardboard-tool"]').on("click", _action);
+        self.menuTools.find('.menu-view li[data-id="cardboard-tool"] a').on("click", _action);
     };
 
     taskbarView.prototype.addActionTool = function(_action){
@@ -351,11 +360,11 @@ APP.core.taskbarView = (function() {
     };
 
     taskbarView.prototype.addActionRemove = function(_action){
-        this.menuTools.find('li[data-id="remove-tool"]').on("click", _action);
+        this.menuTools.find('li[data-id="remove-tool"] a').on("click", _action);
     };
 
     taskbarView.prototype.addActionRotate = function(_action){
-        this.menuTools.find('li[data-id="rotate-tool"]').on("click", _action);
+        this.menuTools.find('li[data-id="rotate-tool"] a').on("click", _action);
     };
 
     taskbarView.prototype.addActionTrees = function(_action){

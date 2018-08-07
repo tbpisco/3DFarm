@@ -36,10 +36,6 @@ APP.game.farmPresenter = (function() {
 
         this.resizeWindow();
 
-        this.intervalLight = setInterval(function(){
-            this.view.updateLight(new Date().getHours());        
-        }.bind(this),1000*60);
-
         var tileTypes = [{name:"grama", src:"images/grass1.jpg"},
                             {name:"terra", src:"images/dirt2.jpg"},
                             {name:"caminho", src:"images/path.jpg"},
@@ -59,6 +55,12 @@ APP.game.farmPresenter = (function() {
         }
 
         this.view.addTiles();
+
+        this.view.updateLight(new Date().getHours());  
+        
+        this.intervalLight = setInterval(function(){
+            this.view.updateLight(new Date().getHours());        
+        }.bind(this),1000*60);
 
         this.view.canvas[0].addEventListener( 'mouseup', onDocumentMouseUp, false );
         this.view.canvas[0].addEventListener( 'mousedown', onDocumentMouseDown, false );

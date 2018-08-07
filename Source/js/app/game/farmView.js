@@ -36,10 +36,14 @@ APP.game.farmView = (function() {
         self.renderer.sortObjects = false;
         self.renderer.setClearColor(0x000000, 0);
         self.renderer.autoClear = false;
+        self.renderer.shadowMapEnabled = true;
+        self.renderer.shadowMapSoft = true;
     };
 
     var addScene = function(){
         self.scene = new THREE.Scene();
+        self.scene.background = new THREE.Color("skyblue");
+        self.scene.fog = new THREE.Fog(self.scene.background, 0, 5000);
     };
 
     var addCamera = function(){
@@ -50,7 +54,6 @@ APP.game.farmView = (function() {
             self.camera = new THREE.PerspectiveCamera(45, self.widthApp / self.heightApp, 0.1, 20000);
             self.camera.position.set( 200,700,800);
         }
-        
         self.scene.add(self.camera);
     };
 
@@ -71,24 +74,62 @@ APP.game.farmView = (function() {
     };
 
     var addLight = function(){
-        self.light = new THREE.AmbientLight( 0xffffff ); // soft white light
-        self.updateLight(); 
+
+        self.light = new THREE.HemisphereLight(0xffffbb , 0x080820,1);
+        self.light.position.copy(new THREE.Vector3(0,500,0));
+        self.lightHelper = new THREE.HemisphereLightHelper(self.light,200);
+        
         self.scene.add( self.light );
 
-        self.spotLight = new THREE.SpotLight( 0xffffff );
+        self.directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        self.directionalLight.color.setHSL(0.1, 1,0.95);
+        self.directionalLight.position.set(-1,1.75,1);
+        self.directionalLight.position.multiplyScalar(30);
+
+        self.directionalLight.castShadow = true;
+        self.directionalLight.shadowDarkness = 0.5;
+        self.directionalLight.shadowCameraVisible = true; // only for debugging
+        
+        self.directionalLight.shadowCameraNear = 2;
+        self.directionalLight.shadowCameraFar = 5;
+        self.directionalLight.shadowCameraLeft = -0.5;
+        self.directionalLight.shadowCameraRight = 0.5;
+        self.directionalLight.shadowCameraTop = 0.5;
+        self.directionalLight.shadowCameraBottom = -0.5;
+
+        self.directionalLight.shadowMapWidth = self.widthApp;
+        self.directionalLight.shadowMapHeight = self.heightApp;
+
+        self.scene.add(self.directionalLight);
+
+        /*self.spotLight = new THREE.SpotLight( 0xffffff );
         self.spotLight.position.set( 100, 2000, 100 );
         self.spotLight.scale.set( 10, 10, 10 );
         self.spotLight.intensity = 0.3;
         self.spotLight.castShadow = true;
 
-        self.spotLight.shadow.mapSize.width = self.widthApp;
-        self.spotLight.shadow.mapSize.height = self.heightApp;
+        //self.spotLight.shadow.mapSize.width = self.widthApp;
+        //self.spotLight.shadow.mapSize.height = self.heightApp;
 
         self.spotLight.shadow.camera.near = 500;
         self.spotLight.shadow.camera.far = 4000;
-        self.spotLight.shadow.camera.fov = 30;
+        self.spotLight.shadow.camera.fov = 30;*/
 
-        self.scene.add( self.spotLight );
+
+        /*self.spotLight = new THREE.SpotLight( 0xffffff );
+        self.spotLight.position.set( 100, 2000, 100 );
+        self.spotLight.scale.set( 10, 10, 10 );
+        self.spotLight.intensity = 0.3;
+        self.spotLight.castShadow = true;
+
+        self.spotLight.shadowMapWidth = self.widthApp;
+        self.spotLight.shadowMapHeight = self.heightApp;
+
+        self.spotLight.shadowCameraNear = 500;
+        self.spotLight.shadowCameraFar = 4000;
+        self.spotLight.shadowCameraFov = 30;
+
+        self.scene.add( self.spotLight );*/
     };
 
     var addEvents = function(){
@@ -123,7 +164,7 @@ APP.game.farmView = (function() {
 
         THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
-        var roundTree = new THREE.MTLLoader()
+          var roundTree = new THREE.MTLLoader()
           .setPath( 'images/trees/' )
           .load( 'roundtree.mtl', function ( materials ) {
             materials.preload();
@@ -134,6 +175,7 @@ APP.game.farmView = (function() {
                  self.roundTree = object;
               }, onProgressObject, onError );
           } );
+
 
           var multipleRoundTree = new THREE.MTLLoader()
           .setPath( 'images/trees/' )
@@ -157,6 +199,7 @@ APP.game.farmView = (function() {
               .setPath( 'images/trees/' )
               .load( 'pinetree.obj', function ( object ) {
                  self.pineModel = object;
+                 self.pineModel.castShadow=true;
               }, onProgressObject, onError );
           } );
     };
@@ -206,102 +249,116 @@ APP.game.farmView = (function() {
           var tamanhoTile = TAMANHO_TILE;
           for (var i = 0; i < this.matrixTiles.length; i++) {
             for (var j = 0; j < this.matrixTiles[i].length; j++) {
+
+              console.log( (-15*tamanhoTile/2 + tamanhoTile*i) + " : " + ( -15*tamanhoTile/2 + tamanhoTile*j));
+
               if(this.matrixTiles[i][j] ==1){
-                var tileVazio = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsTerra ));
+                var tileVazio = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsTerra);
                 tileVazio.overdraw = true;
-                tileVazio.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
-                tileVazio.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
-                tileVazio.name = "tile-" + i +j;
+                tileVazio.position.x = -15*tamanhoTile/2 + tamanhoTile*i;
+                tileVazio.position.z = -15*tamanhoTile/2 + tamanhoTile*j;
+                tileVazio.receiveShadow = true;
+                tileVazio.name = "tile-" + i + j;
                 this.objects.push(tileVazio);
                 this.scene.add(tileVazio);
               }
               else if(this.matrixTiles[i][j] == 2){
-                tilePath = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsPath));
+                tilePath = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsPath);
                 tilePath.overdraw = true;
-                tilePath.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
-                tilePath.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
+                tilePath.position.x = -15*tamanhoTile/2 + tamanhoTile*i;
+                tilePath.position.z = -15*tamanhoTile/2 + tamanhoTile*j;
                 tilePath.name = "tile-" + i +j;
+                tilePath.receiveShadow = true;
                 this.objects.push(tilePath);
                 this.scene.add(tilePath);
               }
               else if(this.matrixTiles[i][j] == 3){
-                tilePathCurva = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsPathCurva));
+                tilePathCurva = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsPathCurva);
                 tilePathCurva.overdraw = true;
                 tilePathCurva.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tilePathCurva.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tilePathCurva.name = "tile-" + i +j;
+                tilePathCurva.receiveShadow = true;
                 this.objects.push(tilePathCurva);
                 this.scene.add(tilePathCurva);
               }
               else if(this.matrixTiles[i][j] == 4){
-                tilePath_1 = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsPath_1));
+                tilePath_1 = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsPath_1);
                 tilePath_1.overdraw = true;
                 tilePath_1.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tilePath_1.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tilePath_1.name = "tile-" + i +j;
+                tilePath_1.receiveShadow = true;
                 this.objects.push(tilePath_1);
                 this.scene.add(tilePath_1);
               }
               else if(this.matrixTiles[i][j] == 5){
-                tilePathCurva_1 = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsPathCurva_1));
+                tilePathCurva_1 = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile),  this.materialsPathCurva_1);
                 tilePathCurva_1.overdraw = true;
                 tilePathCurva_1.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tilePathCurva_1.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tilePathCurva_1.name = "tile-" + i +j;
+                tilePathCurva_1.receiveShadow = true;
                 this.objects.push(tilePathCurva_1);
                 this.scene.add(tilePathCurva_1);
               }
               else if(this.matrixTiles[i][j] == 7){
-                tileStone = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsStone));
+                tileStone = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsStone);
                 tileStone.overdraw = true;
                 tileStone.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tileStone.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tileStone.name = "tile-" + i +j;
+                tileStone.receiveShadow = true;
                 this.objects.push(tileStone);
                 this.scene.add(tileStone);
               }
               else if(this.matrixTiles[i][j] == 8){
-                tileStonePath= new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsStonePath));
+                tileStonePath= new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsStonePath);
                 tileStonePath.overdraw = true;
                 tileStonePath.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tileStonePath.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tileStonePath.name = "tile-" + i +j;
+                tileStonePath.receiveShadow = true;
                 this.objects.push(tileStonePath);
                 this.scene.add(tileStonePath);
               }
               else if(this.matrixTiles[i][j] == 9){
-                tileStoneCurva= new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsStoneCurva));
+                tileStoneCurva= new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsStoneCurva);
                 tileStoneCurva.overdraw = true;
                 tileStoneCurva.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tileStoneCurva.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tileStoneCurva.name = "tile-" + i +j;
+                tileStoneCurva.receiveShadow = true;
                 this.objects.push(tileStoneCurva);
                 this.scene.add(tileStoneCurva);
               }
               else if(this.matrixTiles[i][j] == 10){
-                tileStonePath_1= new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsStonePath_1));
+                tileStonePath_1= new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsStonePath_1);
                 tileStonePath_1.overdraw = true;
                 tileStonePath_1.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tileStonePath_1.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tileStonePath_1.name = "tile-" + i +j;
+                tileStonePath_1.receiveShadow = true;
                 this.objects.push(tileStonePath_1);
                 this.scene.add(tileStonePath_1);
               }
               else if(this.matrixTiles[i][j] == 11){
-                tileStoneCurva_1= new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsStoneCurva_1));
+                tileStoneCurva_1= new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsStoneCurva_1);
                 tileStoneCurva_1.overdraw = true;
                 tileStoneCurva_1.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tileStoneCurva_1.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tileStoneCurva_1.name = "tile-" + i +j;
+                tileStoneCurva_1.receiveShadow = true;
                 this.objects.push(tileStoneCurva_1);
                 this.scene.add(tileStoneCurva_1);
               }
               else{
-                tileGrama = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), new THREE.MeshFaceMaterial( this.materialsGrama ));
+                tileGrama = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsGrama );
                 tileGrama.overdraw = true;
                 tileGrama.position.x = -15*tamanhoTile/2 +tamanhoTile*i;
                 tileGrama.position.z = -15*tamanhoTile/2 +tamanhoTile*j;
                 tileGrama.name = "tile-" + i +j;
+                tileGrama.receiveShadow = true;
                 this.objects.push(tileGrama);
                 this.scene.add(tileGrama);
               }
@@ -309,7 +366,7 @@ APP.game.farmView = (function() {
           };
 
         createMark();
-        createSky();          
+       // createSky();          
           
     };
 
@@ -332,12 +389,8 @@ APP.game.farmView = (function() {
     };
 
     farmView.prototype.createTexture = function(name, src){
-       /* self[name] = new THREE.MeshPhongMaterial( {
-            map: THREE.ImageUtils.loadTexture(src)
-        } );*/
-
         var texture = new THREE.TextureLoader().load( src );
-        self[name] = new THREE.MeshPhongMaterial( { map: texture } );
+        self[name] = new THREE.MeshLambertMaterial( { map: texture } );
     };
 
     farmView.prototype.updateLight = function(hour){
@@ -425,8 +478,6 @@ APP.game.farmView = (function() {
 
         }
         
-        
-        
         self.controls.update();
     };
 
@@ -441,7 +492,7 @@ APP.game.farmView = (function() {
         newModel.name = "arvore-" + new Date().getTime();
         newModel.opacity = 1;
         newModel.position.set( object.position.x,  object.position.y,  object.position.z);
-
+        newModel.castShadow = true;
         self.objects.push(newModel);
         self.scene.add( newModel );
     };
