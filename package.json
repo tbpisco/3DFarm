@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
-  "scripts": {},
+  "scripts": {
+    "start": "cd server && node server.js"
+  },
   "engines": {
     "node": "6.11.2",
     "npm": "3.10.10"
@@ -21,6 +23,13 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-strip-code": "^0.1.4",
     "gulp-uglify": "^3.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "express": "^4.12.3",
+    "nodemailer": "^1.0.4"
   },
   "repository": {
     "type": "git",
