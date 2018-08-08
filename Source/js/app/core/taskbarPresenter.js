@@ -41,7 +41,7 @@ APP.core.taskbarPresenter = (function() {
     };
 
     var selectedTool = function(){
-        self.model.setObjectTypeIdSelected($(this).parent().attr("data-id"));
+        self.model.setObjectTypeIdSelected($(this).attr("data-id"));
     };
 
     var selectedRemoveTool = function(){
