@@ -202,18 +202,11 @@ APP.game.farmPresenter = (function() {
                 for (var i = 0; i < intersects.length; i++) {
                 if(intersects[ i ].object.name.indexOf("tile-")===-1){
 
-                  if(intersects[i].object.parent.name.indexOf("arvore")!==-1){
+                  if(intersects[i].object.name.indexOf("arvore")!==-1){
                     
-                    var name = intersects[i].object.parent.name;
-                   // var object = self.scene.getObjectByName(name[1]+"-"+name[2]);
-                 /*   if(!object){
-                      object = self.scene.getObjectByName(name);
-                      self.removeObjectInScene(object);
-                    }
-                    for (var w = 0; w < object.children.length; w++) {
-                       self.removeObjectInScene(object.children[w].name);
-                    }*/
+                    var name = intersects[i].object.name;
                     self.view.removeObjectInScene(name);
+                    
                   }
                   
                 }

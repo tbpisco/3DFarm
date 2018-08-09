@@ -3,6 +3,7 @@ APP.game.farmView = (function() {
     var self;
 
     var TAMANHO_TILE = 100;
+    var QTD_TILES = 15;
 
     function farmView(){
         self = this;
@@ -172,7 +173,7 @@ APP.game.farmView = (function() {
               .setMaterials( materials )
               .setPath( 'images/trees/' )
               .load( 'roundtree.obj', function ( object ) {
-                 self.roundTree = object;
+                 self.roundTree = object.children[0];
               }, onProgressObject, onError );
           } );
 
@@ -185,7 +186,7 @@ APP.game.farmView = (function() {
               .setMaterials( materials )
               .setPath( 'images/trees/' )
               .load( 'multipleroundtree.obj', function ( object ) {
-                 self.multipleRoundTree = object;
+                 self.multipleRoundTree = object.children[0];
               }, onProgressObject, onError );
           } );
 
@@ -198,7 +199,7 @@ APP.game.farmView = (function() {
               .setMaterials( materials )
               .setPath( 'images/trees/' )
               .load( 'pinetree.obj', function ( object ) {
-                 self.pineModel = object;
+                 self.pineModel = object.children[0];
                  self.pineModel.castShadow=true;
               }, onProgressObject, onError );
           } );
@@ -209,7 +210,7 @@ APP.game.farmView = (function() {
         this.objects = [];
 
         this.matrixTiles = [];
-        for (var i = 0; i < 15; i++) {
+        for (var i = 0; i < QTD_TILES; i++) {
           this.matrixTiles.push([]);
         };
 
@@ -249,8 +250,6 @@ APP.game.farmView = (function() {
           var tamanhoTile = TAMANHO_TILE;
           for (var i = 0; i < this.matrixTiles.length; i++) {
             for (var j = 0; j < this.matrixTiles[i].length; j++) {
-
-              console.log( (-15*tamanhoTile/2 + tamanhoTile*i) + " : " + ( -15*tamanhoTile/2 + tamanhoTile*j));
 
               if(this.matrixTiles[i][j] ==1){
                 var tileVazio = new THREE.Mesh(new THREE.BoxGeometry(tamanhoTile, 40, tamanhoTile), this.materialsTerra);
@@ -493,8 +492,10 @@ APP.game.farmView = (function() {
         newModel.opacity = 1;
         newModel.position.set( object.position.x,  object.position.y,  object.position.z);
         newModel.castShadow = true;
+        
         self.objects.push(newModel);
         self.scene.add( newModel );
+
     };
 
     farmView.prototype.rotateAroundObjectAxis = function(object, axis, radians) {
@@ -508,12 +509,13 @@ APP.game.farmView = (function() {
     {
       var object = this.scene.getObjectByName(name);
       if(object){
-         console.log('remove: ' + name);
+
          for (var i = 0; i < this.objects.length; i++) {
            if(this.objects[i].name == name){
               this.objects.splice(i, 1);
            }
          }
+
         this.scene.remove( object );
       }
     };
