@@ -3,6 +3,10 @@
     bottom: 0;
     width: 100%;
     left:0;
+    height: 1.5em;
+    left: 0;
+    background-color: #178181;
+    z-index: 2;
 }
 
 .menu-mode{
@@ -24,6 +28,19 @@
         vertical-align: middle;
         position: relative;
 
+        background-color: #62625c;
+        box-shadow: 0em 0em 0.5em #3b3535;
+        overflow: hidden;
+        border-radius: 50%;
+
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        transition: all .3s ease;
+
+        &:hover{
+            @include transform(translateY(-20%) scale(1.2));
+        }
+
         a,
         img{
             height: 100%;
@@ -35,7 +52,8 @@
 
         i{
             color:white;
-            font-size: 1.8em;
+            font-size: 1.2em;
+            padding-top: 0.3em;
         }
     }
 }
@@ -55,14 +73,12 @@
 .menu.terrain{
     width: 100%;
     position: fixed;
+    padding-top: 0.5em;
     z-index: 1;
     bottom: 0;
-	background-color: #4a7893;
+	background-color: #178181;
 
     transform: translate(0, 100%); 
-
-    display: none;
-    padding-left: 13em;
 
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -81,7 +97,7 @@
 }
 
 .menu ul{
-	text-align: left;
+	text-align: center;
 	vertical-align: middle;
 }
 

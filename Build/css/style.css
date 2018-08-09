@@ -112,7 +112,11 @@ div#help-screen {
   position: absolute;
   bottom: 0;
   width: 100%;
-  left: 0; }
+  left: 0;
+  height: 1.5em;
+  left: 0;
+  background-color: #178181;
+  z-index: 2; }
 
 .menu-mode {
   position: absolute;
@@ -129,7 +133,20 @@ div#help-screen {
     margin: 0 0.2em;
     color: white;
     vertical-align: middle;
-    position: relative; }
+    position: relative;
+    background-color: #62625c;
+    box-shadow: 0em 0em 0.5em #3b3535;
+    overflow: hidden;
+    border-radius: 50%;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    transition: all .3s ease; }
+    .menu-mode li:hover {
+      -moz-transform: translateY(-20%) scale(1.2);
+      -o-transform: translateY(-20%) scale(1.2);
+      -ms-transform: translateY(-20%) scale(1.2);
+      -webkit-transform: translateY(-20%) scale(1.2);
+      transform: translateY(-20%) scale(1.2); }
     .menu-mode li a,
     .menu-mode li img {
       height: 100%;
@@ -139,7 +156,8 @@ div#help-screen {
       position: absolute; }
     .menu-mode li i {
       color: white;
-      font-size: 1.8em; }
+      font-size: 1.2em;
+      padding-top: 0.3em; }
 
 .menu {
   width: 100%;
@@ -153,12 +171,11 @@ div#help-screen {
 .menu.terrain {
   width: 100%;
   position: fixed;
+  padding-top: 0.5em;
   z-index: 1;
   bottom: 0;
-  background-color: #4a7893;
+  background-color: #178181;
   transform: translate(0, 100%);
-  display: none;
-  padding-left: 13em;
   -webkit-transition: all .3s ease;
   -moz-transition: all .3s ease;
   transition: all .3s ease; }
@@ -172,7 +189,7 @@ div#help-screen {
   transform: translate(0, 0); }
 
 .menu ul {
-  text-align: left;
+  text-align: center;
   vertical-align: middle; }
 
 .menu ul li {

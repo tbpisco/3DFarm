@@ -139,7 +139,7 @@ APP.core.taskbarView = (function() {
         html += '    <li data-id="rotate-tool"><a href="#"><i class="fas fa-undo-alt"></i></a></li>'; 
         html += '    <li data-id="remove-tool"><a href="#"><i class="far fa-trash-alt"></i></a></li>';     
         html += '    <li data-id="cardboard-tool"><a href="#"><span><img class="cardboard-icon" src="images/cardboard.svg"</span></a></li>';
-        html += '    <li data-id="help-button"><a href="#"><i class="fas fa-question-circle"></i></a></li>'
+        html += '    <li data-id="help-button"><a href="#"><i class="fas fa-question"></i></a></li>'
         html += '</ul>';
 
         return $(html);
