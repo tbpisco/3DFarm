@@ -36,7 +36,9 @@ APP.core.taskbarPresenter = (function() {
     var openVrScreen = function(){
         resetMenu();
         if(self.model.getIsMobile()){
-             window.dispatchEvent(window.APP.core.signals.GameEvents.enableVr);
+            self.model.setVrEnabled();
+            self.view.toggleVR();
+            window.dispatchEvent(window.APP.core.signals.GameEvents.enableVr);
         } else {
             window.dispatchEvent(window.APP.core.signals.GameEvents.openVrEvent);
         }

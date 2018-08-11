@@ -455,7 +455,7 @@ APP.game.farmView = (function() {
        self.renderer.setSize(self.widthApp, self.heightApp);
 
        if(self.VRViewEnabled){
-            self.camera.aspect = self.widthApp/2 / self.heightApp;
+            self.camera.aspect = self.widthApp / self.heightApp;
        } else {
             self.camera.aspect = self.widthApp / self.heightApp;
        }

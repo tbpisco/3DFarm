@@ -23,7 +23,8 @@ APP.core.model.gameModel = (function() {
     };
 
     gameModel.prototype.setVrEnabled = function(value){
-        vrEnabled = value;
+        if(value === undefined)vrEnabled = !vrEnabled;
+            else vrEnabled = value;
     };
 
     var objectTypeIdSelected = 0;

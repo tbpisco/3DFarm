@@ -9,9 +9,7 @@ APP.core.taskbarView = (function() {
 
     taskbarView.prototype.init = function(){
         addTaskbarContainer();
-       // addHelpButton();
         addMenuTools();
-        //addMenuAll();
         addMenuTrees();
         addMenuTerrain();
         addEvents();
@@ -24,15 +22,6 @@ APP.core.taskbarView = (function() {
     var createTaskbarContainer = function(){
         return $('<div class="taskbar clear"></div>');
     };
-
-   /* var addHelpButton = function(){
-        self.helpButton = createHelpButton();
-        self.view.append(self.helpButton);
-    };
-
-    var createHelpButton = function(){
-        return $('<a href="#" class="help button"><i class="fas fa-question-circle"></i></a>');
-    };*/
 
     taskbarView.prototype.addMouseCursor = function(){
         this.mouseCursor = createMouseCursor();
@@ -94,7 +83,7 @@ APP.core.taskbarView = (function() {
 
             $(this).parent().addClass("active"); 
             $('.mouse-cursor div[data-id="' + self.modeSelected + '"]').addClass("active");
-            
+
         }
 
         if(!self.modeSelected)return;     
@@ -103,7 +92,6 @@ APP.core.taskbarView = (function() {
         self.menuTrees.removeClass("active");
         self.menuTerrain.removeClass("active");
 
-       // self.menuTools.find(".current-tool div").removeClass("active");
         $(".mouse-cursor div").removeClass("active");
 
         changeCursorType(self.modeSelected);
@@ -117,9 +105,6 @@ APP.core.taskbarView = (function() {
             self.menuTools.find("ul.menu-build").removeClass("active");
             
         }
-
-        
-       // $('.current-tool div[data-id="' + self.modeSelected + '"]').addClass("active");
 
     });
 
@@ -234,6 +219,10 @@ APP.core.taskbarView = (function() {
 
     taskbarView.prototype.addActionVr = function(_action){
         self.menuTools.find('li[data-id="cardboard-tool"] a').on("click", _action);
+    };
+
+    taskbarView.prototype.toggleVR = function(){
+        self.view.toggleClass("vr");
     };
 
     taskbarView.prototype.addActionTool = function(_action){

@@ -16,8 +16,12 @@ APP.core.helpScreenPresenter = (function() {
     helpScreenPresenter.prototype.openHelpScreen = function(){
         var content;
         if(this.model.getIsMobile()){
-            content = new APP.core.helpMobileViewContentBuilder();
-        }else {
+            if(this.model.getVrEnabled()){
+                content = new APP.core.helpMobileVRViewContentBuilder();
+            } else {
+                content = new APP.core.helpMobileViewContentBuilder();
+            }
+        } else {
             content = new APP.core.helpDesktopViewContentBuilder();
         }
         this.view.addHelpScreenContainer(new APP.core.viewContentBuilder().build(content));
