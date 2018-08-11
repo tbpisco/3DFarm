@@ -10,10 +10,11 @@ APP.core.VrScreenView = (function() {
 
     VrScreenView.prototype.addScreenContainer = function(){
         this.view = createScreenContainer();
-        addCloseButton();
+        
         addTitleContainer();
         addInstructionContainer();
         addQRCode();
+        addCloseButton();
         
     };
 
@@ -31,7 +32,7 @@ APP.core.VrScreenView = (function() {
     };
 
     var createCloseButton = function(){
-        return $('<button class="close-button"><i class="far fa-times-circle"></i></button>');
+        return $('<button class="close-button">OK</button>');
     };
 
     var createScreenContainer = function(){

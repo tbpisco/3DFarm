@@ -69,32 +69,29 @@ div#vr-screen {
   z-index: 4;
   top: 0;
   color: black;
-  background-color: rgba(0, 0, 0, 0.8); }
+  background-color: rgba(0, 0, 0, 0.5); }
   div#vr-screen .container {
-    color: white;
-    padding: 2%;
-    border-radius: 0.5em;
     text-align: center;
     margin: 0 auto;
-    background-color: #3b5488;
     position: absolute;
+    width: 50%;
     top: 50%;
     left: 50%;
+    background-color: #178181;
+    padding: 0.5em;
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%); }
   div#vr-screen h1, div#vr-screen p {
     margin-bottom: 2%; }
   div#vr-screen button {
-    cursor: pointer;
-    border: none;
-    vertical-align: middle;
-    box-sizing: border-box;
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 1.5em;
     color: white;
-    border-radius: 50%;
-    background-color: #3b5488; }
+    border: 0;
+    background-color: #0b4040;
+    padding: 0.5em 1em;
+    margin: 1em; }
 
 #qr-code {
   padding: 5%; }
@@ -106,7 +103,28 @@ div#help-screen {
   position: absolute;
   z-index: 4;
   color: black;
-  background-color: rgba(0, 0, 0, 0.8); }
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center; }
+  div#help-screen .title {
+    margin: 1em; }
+  div#help-screen .inner-container {
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    background-color: #178181;
+    padding: 0.5em;
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  div#help-screen .close-button {
+    color: white;
+    border: 0;
+    background-color: #0b4040;
+    padding: 0.5em 1em;
+    margin: 1em; }
 
 .taskbar {
   position: absolute;

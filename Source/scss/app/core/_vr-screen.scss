@@ -5,19 +5,18 @@ div#vr-screen {
     z-index: 4;
     top: 0;
     color: black;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
 
 	.container {
-	    color: white;
-	    padding: 2%;
-	    border-radius: 0.5em;
 	    text-align: center;
-	    margin: 0 auto;
-	    background-color: rgb(59, 84, 136);
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%,-50%);
+	    margin: 0 auto;		
+		position: absolute;
+        width:50%;
+        top: 50%;
+        left: 50%;
+        background-color: #178181;
+        padding: 0.5em;
+        @include transform(translate(-50%,-50%));
 	}
 
 	h1,p{
@@ -25,17 +24,11 @@ div#vr-screen {
 	}
 
 	button{
-		cursor: pointer;
-    	border: none;
-    	vertical-align: middle;
-    	box-sizing: border-box;
-    	position: absolute;
-    	right: 0;
-    	top: 0;
-    	font-size: 1.5em;
-    	color: white;
-    	border-radius: 50%;
-    	background-color: #3b5488;
+		color: white;
+        border: 0;
+        background-color: #0b4040;
+        padding: 0.5em 1em;
+        margin: 1em;
 	}
 }
 

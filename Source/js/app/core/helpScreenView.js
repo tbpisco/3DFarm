@@ -8,22 +8,23 @@ APP.core.helpScreenView = (function() {
 
     helpScreenView.prototype.addHelpScreenContainer = function(content){
         this.view = createHelpScreenContainer();
+        this.innerView = createHelpScreenInnerContainer().appendTo(this.view);
         addTitleContainer();
         addInstructionContainer(content);
         addCloseButton();
     };
 
     var addTitleContainer = function(){
-        self.titleView = createTitleContainer().appendTo(self.view);
+        self.titleView = createTitleContainer().appendTo(self.innerView);
     };
 
     var addInstructionContainer = function(content){
-        self.instructionView = createInstructionContainer(content).appendTo(self.view);
+        self.instructionView = createInstructionContainer(content).appendTo(self.innerView);
     };
 
     var addCloseButton = function(){
         self.closeButton = createCloseButton();
-        self.view.append(self.closeButton);
+        self.innerView.append(self.closeButton);
     };
 
     var createCloseButton = function(){
@@ -34,19 +35,22 @@ APP.core.helpScreenView = (function() {
         return $('<div id="help-screen"></div>');
     };
 
+    var createHelpScreenInnerContainer = function(){
+        return $('<div class="inner-container"></div>');
+    };
+
     var createTitleContainer = function(){
         return $('<div class="title">HELP</div>');
     };
 
     var createInstructionContainer = function(content){
-
         var html = '';
-        
         return $(content);
     };
 
     helpScreenView.prototype.addActionMode = function(_action){
         this.closeButton.on("click", _action);
+        $(this.view).on("click", _action);
     };
 
     helpScreenView.prototype.hide = function(){

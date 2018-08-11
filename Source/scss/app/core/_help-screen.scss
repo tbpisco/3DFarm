@@ -1,4 +1,3 @@
-
 div#help-screen {
     width: 100%;
     height: 100%;
@@ -6,8 +5,31 @@ div#help-screen {
     position: absolute;
     z-index: 4;
     color: black;
-    background-color: rgba(0, 0, 0, 0.8);
-}
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
 
+    .title{
+        margin: 1em;
+    }
+
+    .inner-container{
+        position: absolute;
+        width:50%;
+        top: 50%;
+        left: 50%;
+        background-color: #178181;
+        padding: 0.5em;
+        @include transform(translate(-50%,-50%));
+    }
+
+    .close-button {
+        color: white;
+        border: 0;
+        background-color: #0b4040;
+        padding: 0.5em 1em;
+        margin: 1em;
+    }
+    
+}
 
 
