@@ -141,7 +141,7 @@ div#help-screen {
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
     transition: all .3s ease; }
-    .menu-mode li:hover {
+    .menu-mode li.active, .menu-mode li:hover {
       -moz-transform: translateY(-20%) scale(1.2);
       -o-transform: translateY(-20%) scale(1.2);
       -ms-transform: translateY(-20%) scale(1.2);
@@ -158,6 +158,13 @@ div#help-screen {
       color: white;
       font-size: 1.2em;
       padding-top: 0.3em; }
+
+.menu-mode li.active {
+  -moz-transform: translateY(-20%) scale(1.2);
+  -o-transform: translateY(-20%) scale(1.2);
+  -ms-transform: translateY(-20%) scale(1.2);
+  -webkit-transform: translateY(-20%) scale(1.2);
+  transform: translateY(-20%) scale(1.2); }
 
 .menu {
   width: 100%;

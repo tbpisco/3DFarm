@@ -29,16 +29,23 @@ APP.core.taskbarPresenter = (function() {
     };
 
     var openHelpScreen = function(){
+        resetMenu();
     	window.dispatchEvent(window.APP.core.signals.GameEvents.openHelpEvent);
     };
 
     var openVrScreen = function(){
+        resetMenu();
         if(self.model.getIsMobile()){
              window.dispatchEvent(window.APP.core.signals.GameEvents.enableVr);
         } else {
             window.dispatchEvent(window.APP.core.signals.GameEvents.openVrEvent);
         }
     };
+
+    var resetMenu = function(){
+        self.model.setMenuSelected(-1);
+        self.model.setObjectTypeIdSelected(-1);
+    }
 
     var selectedTool = function(){
         self.model.setObjectTypeIdSelected($(this).attr("data-id"));

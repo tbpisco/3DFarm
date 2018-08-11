@@ -70,20 +70,40 @@ APP.core.taskbarView = (function() {
 
     var addEvents = function(){
 
+        self.menuTrees.find("a").on("click", function(event){
+            self.menuTrees.find("li").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+        self.menuTerrain.find("a").on("click", function(event){
+            self.menuTerrain.find("li").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+
         self.menuTools.find("li > a").on("click", function(event){
 
         self.modeSelected = $(this).parent().attr("data-id");
 
-        if(!self.modeSelected)return;
-
         self.menuTools.find("li").removeClass("active");
-        $(this).parent().addClass("active");
+
+        if(self.modeSelected === "cardboard-tool" || self.modeSelected === "help-button"){
+            
+            self.modeSelected = "view-tool";
+            $('.mouse-cursor div[data-id="view-tool"]').addClass("active");
+
+        } else {
+
+            $(this).parent().addClass("active"); 
+            $('.mouse-cursor div[data-id="' + self.modeSelected + '"]').addClass("active");
+            
+        }
+
+        if(!self.modeSelected)return;     
 
         self.menuTools.removeClass("active");
         self.menuTrees.removeClass("active");
         self.menuTerrain.removeClass("active");
 
-        self.menuTools.find(".current-tool div").removeClass("active");
+       // self.menuTools.find(".current-tool div").removeClass("active");
         $(".mouse-cursor div").removeClass("active");
 
         changeCursorType(self.modeSelected);
@@ -98,8 +118,8 @@ APP.core.taskbarView = (function() {
             
         }
 
-        $('.mouse-cursor div[data-id="' + self.modeSelected + '"]').addClass("active");
-        $('.current-tool div[data-id="' + self.modeSelected + '"]').addClass("active");
+        
+       // $('.current-tool div[data-id="' + self.modeSelected + '"]').addClass("active");
 
     });
 
@@ -114,6 +134,13 @@ APP.core.taskbarView = (function() {
             self.menuTerrain.removeClass("active");
             self.menuTools.find("ul").toggleClass("active");
         }
+
+
+        self.menuTrees.find("li").removeClass("active");
+            self.menuTrees.find("li:first-child").addClass("active");
+
+        self.menuTools.find("li").removeClass("active");
+        $(event.currentTarget).parent().addClass("active");
     });
 
     self.menuTools.find("a.terrain-menu").on("click", function(event){
@@ -126,6 +153,12 @@ APP.core.taskbarView = (function() {
                 self.menuTrees.removeClass("active");
                 self.menuTools.find("ul").toggleClass("active");
             }
+
+            self.menuTerrain.find("li").removeClass("active");
+            self.menuTerrain.find("li:first-child").addClass("active");
+
+            self.menuTools.find("li").removeClass("active");
+            $(event.currentTarget).parent().addClass("active");
         });
     };
 

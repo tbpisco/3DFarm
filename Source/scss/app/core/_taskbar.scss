@@ -37,6 +37,7 @@
         -moz-transition: all .3s ease;
         transition: all .3s ease;
 
+        &.active,
         &:hover{
             @include transform(translateY(-20%) scale(1.2));
         }
@@ -57,6 +58,10 @@
         }
     }
 }
+
+.menu-mode li.active{
+            @include transform(translateY(-20%) scale(1.2));
+        }
 
 .menu{
     width: 100%;
