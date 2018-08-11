@@ -7,20 +7,12 @@ APP.core.helpMobileVRViewContentBuilder = (function() {
     };
 
     helpMobileVRViewContentBuilder.prototype.build = function(){
-    	var content = new APP.core.viewContent();
-    	content.content.push( '<h2> Mobile VR version</h2>');
-
-    	/*
-        In touch screen devices:
-        Rotate: 1 finger
-        Zoom: pinch
-        Pan: 3 fingers
-
-        To build:
-        You can choose one tool in the bottom menu.
-        Use the <img src="images/rotate.png" alt=""> button to rotate floors.
-        Use the <img src="images/remove.png" alt=""> button to remove trees.*/
-        return content;
+    	var popup = new APP.core.viewContent();
+        popup.content.push( '<p>');
+        popup.content.push( 'To navigate use a virtual reality headset.<br><br>');
+        popup.content.push( 'To return to the view mode click on <img style="width:2em;height:2em;" src="images/cardboard.svg" alt=""> button.');
+        popup.content.push( '</p>');
+        return popup;
     };
    
     return helpMobileVRViewContentBuilder;

@@ -7,20 +7,23 @@ APP.core.helpDesktopViewContentBuilder = (function() {
     };
 
     helpDesktopViewContentBuilder.prototype.build = function(){
-    	var content = new APP.core.viewContent();
-    	content.content.push( '<h2>Desktop version</h2>');
+    	var popup = new APP.core.viewContent();
+    	popup.content.push( '<h2>To navigate use:</h2>');
+        popup.content.push( '<ul>');
+        popup.content.push( '<li><b>Rotate:</b> left mouse button + drag</li>');
+        popup.content.push( '<li><b>Zoom:</b> middle mouse button + drag</li>');
+        popup.content.push( '<li><b>Pan:</b> right mouse button + drag</li>');
+        popup.content.push( '</ul>');
 
-    	/*
-        In desktop to navigate use:
-        Rotate: left mouse button + drag
-        Zoom: middle mouse button + drag
-        Pan: right mouse button + drag
-        
-        To build:
-        You can choose one tool in the bottom menu.
-        Use the <img src="images/rotate.png" alt=""> button to rotate floors.
-        Use the <img src="images/remove.png" alt=""> button to remove trees.*/
-        return content;
+        popup.content.push( '<h2> To build:</h2>');
+        popup.content.push( '<ul>');
+        popup.content.push( '<li>Use <img style="width:2em;height:2em;" src="images/trees.jpg" alt=""> button to add trees.</li>');
+        popup.content.push( '<li>Use <img style="width:2em;height:2em;" src="images/terrain.jpg" alt=""> button to change tile patch.</li>');
+        popup.content.push( '<li>Use <i class="fas fa-undo-alt"></i> button to rotate elements.</li>');
+        popup.content.push( '<li>Use <i class="far fa-trash-alt"></i> button to remove elements.</li>');
+        popup.content.push( '</ul>');
+
+        return popup;
     };
    
     return helpDesktopViewContentBuilder;
