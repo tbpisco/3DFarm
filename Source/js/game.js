@@ -26,6 +26,10 @@ APP.gameApp = (function() {
 		var gameScreenView    = new APP.game.gameScreenView();
 		var gameScreen    = new APP.game.gameScreenPresenter(gameScreenView);
 		gameScreen.setupModel(self.gameModel);
+
+		if(self.gameModel.getVrEnabled() && self.gameModel.getIsMobile()){
+			window.dispatchEvent(window.APP.core.signals.GameEvents.enableVr);
+		}
 		
 	};
 

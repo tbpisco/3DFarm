@@ -23,10 +23,9 @@ APP.game.farmPresenter = (function() {
 
         if(this.model.getIsMobile()){
             this.view.addEventsForMobile();
-            this.view.init(self.model.getVrEnabled());
-        } else {
-            this.view.init(false);
-        }
+        } 
+        
+        this.view.init();
     };
 
     farmPresenter.prototype.init = function(){ 

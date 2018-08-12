@@ -9,8 +9,7 @@ APP.game.farmView = (function() {
         self = this;
     };
 
-    farmView.prototype.init = function(enabled){
-        this.VRViewEnabled = enabled;
+    farmView.prototype.init = function(){
         addFarmContainer();
         addCanvasElement();
     };

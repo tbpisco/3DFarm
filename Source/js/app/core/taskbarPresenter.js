@@ -6,6 +6,7 @@ APP.core.taskbarPresenter = (function() {
         self = this;
         this.view = view;
         this.container = container;
+        window.addEventListener(APP.core.signals.GameEvents.ENABLE_VR, this.showVrMode.bind(this), false);
    }
 
     taskbarPresenter.prototype.addTaskbar = function(){
@@ -33,11 +34,14 @@ APP.core.taskbarPresenter = (function() {
     	window.dispatchEvent(window.APP.core.signals.GameEvents.openHelpEvent);
     };
 
+    taskbarPresenter.prototype.showVrMode = function(){
+        self.view.toggleVR();
+    };
+
     var openVrScreen = function(){
         resetMenu();
         if(self.model.getIsMobile()){
-            self.model.setVrEnabled();
-            self.view.toggleVR();
+            self.model.setVrEnabled();            
             window.dispatchEvent(window.APP.core.signals.GameEvents.enableVr);
         } else {
             window.dispatchEvent(window.APP.core.signals.GameEvents.openVrEvent);
