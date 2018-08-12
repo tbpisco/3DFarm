@@ -468,9 +468,9 @@ APP.game.farmView = (function() {
     {
         self[object].position.x = self.scene.getObjectByName(name).position.x;
         self[object].position.z = self.scene.getObjectByName(name).position.z;
-        for (var i = 0; i <   self[object].children.length; i++) {
-            self[object].children[i].material.opacity = 0.5;
-            self[object].children[i].material.transparent = true;
+        for (var i = 0; i <   self[object].material.length; i++) {
+            self[object].material[i].opacity = 0.5;
+            self[object].material[i].transparent = true;
         }
     };
 
@@ -511,15 +511,28 @@ APP.game.farmView = (function() {
     };
 
     farmView.prototype.addNewModel = function(object, model){
-        var newModel = self[model].clone();
+        var newModel;
         var materialClone;
         var meshClone;
-        newModel.name = "arvore-" + new Date().getTime();
+        var newName = "arvore-" + new Date().getTime();
+
+        var materials = [];
+
+        for (var i = 0; i <   self[model].material.length; i++) {
+          materialClone = self[model].material[i].clone();
+          materialClone.name = newName + "-material-" + i;
+          materialClone.opacity = 1;
+          materialClone.transparent = false;
+          materials.push(materialClone);
+        }
+
+        newModel = new THREE.Mesh( self[model].geometry , materials );
+        newModel.name = newName;
         newModel.opacity = 1;
         newModel.position.set( object.position.x,  object.position.y,  object.position.z);
         newModel.castShadow = true;
         
-        self.objects.push(newModel);
+        self.objects.push( newModel );
         self.scene.add( newModel );
 
     };
