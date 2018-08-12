@@ -11,7 +11,7 @@ var stripCode = require('gulp-strip-code');
 var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('scripts', function() {
-    return gulp.src(['./Source/js/libs/*.js', './Source/js/package.js','./Source/js/utils/!(*.test).js','./Source/js/game/**/**/!(*.test).js','./Source/js/game.js'])
+    return gulp.src(['./Source/js/libs/jquery-1.11.3.min.js','./Source/js/libs/qrcode.js','./Source/js/libs/three.min.js','./Source/js/libs/DDSLoader.js','./Source/js/libs/MTLLoader.js','./Source/js/libs/OBJLoader.js','./Source/js/libs/OrbitControls.js','./Source/js/libs/StereoEffect.js','./Source/js/libs/DeviceOrientationControls.js', './Source/js/package.js','./Source/js/app/**/**/!(*.test).js','./Source/js/game.js'])
         .pipe(sourcemaps.init())
           .pipe(stripCode({
             start_comment: "test-code",

@@ -9,10 +9,10 @@ app.use(compression());
 app.use(cors());
     
 app.get('/', function(req, res) {
-    res.sendFile('index.html', { root: "../Source" }); 
+    res.sendFile('index.html', { root: "../Build" }); 
 });
     
-app.use(express.static('../Source')); 
+app.use(express.static('../Build')); 
 
 app.use(express.json({limit: '5000000mb'}));
 app.use(express.urlencoded({extended: true, limit: '5000000mb'}));

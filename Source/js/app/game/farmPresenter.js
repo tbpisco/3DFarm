@@ -161,7 +161,6 @@ APP.game.farmPresenter = (function() {
         } else {
 
           if ( intersects.length > 0 ) {
-            console.log(intersects[0].object.name);
             if(typeID == 0){
                 self.view.updateTerrainTile(intersects[0].object, "materialsGrama");
             } else if(typeID == 1){
@@ -186,7 +185,6 @@ APP.game.farmPresenter = (function() {
                 self.view.updateTerrainTile(intersects[0].object, "materialsStonePathCurva_1");
             } else if(typeID == 12){
 
-              console.log("position: " + intersects[0].object.position);
               self.view.addNewModel(intersects[ 0 ].object, "pineModel");
 
             } else if(typeID == 13){
