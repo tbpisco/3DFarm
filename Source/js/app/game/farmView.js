@@ -44,7 +44,7 @@ APP.game.farmView = (function() {
     var addScene = function(){
         self.scene = new THREE.Scene();
         self.scene.background = new THREE.Color("skyblue");
-        self.scene.fog = new THREE.Fog(self.scene.background, 0, 5000);
+       // self.scene.fog = new THREE.Fog(self.scene.background, 0, 5000);
     };
 
     var addCamera = function(){
@@ -89,7 +89,7 @@ APP.game.farmView = (function() {
 
         self.directionalLight.castShadow = true;
         self.directionalLight.shadowDarkness = 0.5;
-        self.directionalLight.shadowCameraVisible = true; // only for debugging
+        //self.directionalLight.shadowCameraVisible = true; // only for debugging
         
         self.directionalLight.shadowCameraNear = 2;
         self.directionalLight.shadowCameraFar = 5;
@@ -395,30 +395,56 @@ APP.game.farmView = (function() {
     farmView.prototype.updateLight = function(hour){
         if(hour === 0){
           self.light.color.setHex( 0x333333);
+          self.directionalLight.color.setHex( 0x333333);
+          self.scene.background = new THREE.Color(0x030f1e);
         } else if(hour === 1 || hour === 23){
           self.light.color.setHex( 0x444444);
+          self.directionalLight.color.setHex( 0x444444);
+          self.scene.background = new THREE.Color(0x030f1e);
         } else if(hour === 2 || hour === 22){
           self.light.color.setHex( 0x555555);
+          self.directionalLight.color.setHex( 0x555555);
+          self.scene.background = new THREE.Color(0x09405b);
         } else if(hour === 3 || hour === 21){
           self.light.color.setHex( 0x666666);
+          self.directionalLight.color.setHex( 0x666666);
+          self.scene.background = new THREE.Color(0x09405b);
         } else if(hour === 4 || hour === 20){
           self.light.color.setHex( 0x777777);
+          self.directionalLight.color.setHex( 0x777777);
+          self.scene.background = new THREE.Color(0x125c80);
         } else if(hour === 5 || hour === 19){
           self.light.color.setHex( 0x888888);
+          self.directionalLight.color.setHex( 0x888888);
+          self.scene.background = new THREE.Color(0x125c80);
         } else if(hour === 6 || hour === 18){
           self.light.color.setHex( 0x999999);
+          self.directionalLight.color.setHex( 0x999999);
+          self.scene.background = new THREE.Color("skyblue");
         } else if(hour === 7 || hour === 17){
           self.light.color.setHex( 0xaaaaaa);
+          self.directionalLight.color.setHex( 0xaaaaaa);
+          self.scene.background = new THREE.Color("skyblue");
         } else if(hour === 8 || hour === 16){
           self.light.color.setHex( 0xbbbbbb);
+          self.directionalLight.color.setHex( 0xbbbbbb);
+          self.scene.background = new THREE.Color("skyblue");
         } else if(hour === 9 || hour === 15){
           self.light.color.setHex( 0xcccccc);
+          self.directionalLight.color.setHex( 0xcccccc);
+          self.scene.background = new THREE.Color("skyblue");
         } else if(hour === 10 || hour === 14){
           self.light.color.setHex( 0xdddddd);
+          self.directionalLight.color.setHex( 0xdddddd);
+          self.scene.background = new THREE.Color("skyblue");
         } else if(hour === 11 || hour === 13){
           self.light.color.setHex( 0xeeeeee);
+          self.directionalLight.color.setHex( 0xeeeeee);
+          self.scene.background = new THREE.Color("skyblue");
         } else if(hour === 12){
           self.light.color.setHex( 0xffffff);
+          self.directionalLight.color.setHex( 0xffffff);
+          self.scene.background = new THREE.Color("skyblue");
         }  
     };
 
