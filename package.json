@@ -13,23 +13,17 @@
   "author": "Thatiane Pisco",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-cache": "^0.4.6",
+    "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-imagemin": "^3.3.0",
-    "gulp-include-source": "0.0.5",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-strip-code": "^0.1.4",
     "gulp-uglify": "^3.0.0"
   },
   "dependencies": {
     "body-parser": "^1.15.1",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
-    "express": "^4.12.3",
-    "nodemailer": "^1.0.4"
+    "express": "^4.12.3"
   },
   "repository": {
     "type": "git",
